@@ -18,5 +18,25 @@
     <ClCompile Include="Main_Siddhant.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Account_Siddhant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BankAccount_Siddhant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StockAccount_Siddhant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Account_Siddhant.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BankAccount_Siddhant.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StockAccount_Siddhant.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
