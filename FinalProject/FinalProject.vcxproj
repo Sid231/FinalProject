@@ -118,6 +118,7 @@
   <ItemGroup>
     <ClInclude Include="Account_Siddhant.h" />
     <ClInclude Include="BankAccount_Siddhant.h" />
+    <ClInclude Include="accountNode.h" />
     <ClInclude Include="StockAccount_Siddhant.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

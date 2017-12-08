@@ -2,9 +2,10 @@
 #include "Account_Siddhant.h"
 #include "BankAccount_Siddhant.h"
 #include "StockAccount_Siddhant.h"
-
+#include "accountNode.h"
 using namespace std;
 
+accountNode *head = NULL;
 int main() {
 	int choice1 = 0;
 	int choice2 = 0;
@@ -48,7 +49,7 @@ int main() {
 				switch (choice2)
 				{
 				case 1:
-					stockAccount.displayStockPrice();
+					stockAccount.displayStockPrice(head);
 					break;
 				case 2:
 					stockAccount.displayCurrentPortfolio();
