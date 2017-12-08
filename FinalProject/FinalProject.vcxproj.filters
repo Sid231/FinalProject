@@ -23,11 +23,11 @@
     <ClCompile Include="StockAccount_Siddhant.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="accountNode_Siddhant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="accountNode.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="StockAccount_Siddhant.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -37,5 +37,16 @@
     <ClInclude Include="BankAccount_Siddhant.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="accountNode_Siddhant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Result_1.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="Result_2.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

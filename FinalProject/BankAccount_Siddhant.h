@@ -7,11 +7,11 @@
 #include "Account_Siddhant.h"
 using namespace std;
 
-class BankAccount_Siddhant : public Account_Siddhant
+class BankAccount : public Account
 {
 public:
-	BankAccount_Siddhant();
-	~BankAccount_Siddhant();
+	BankAccount();
+	~BankAccount();
 
 };
 

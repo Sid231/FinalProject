@@ -2,11 +2,11 @@
 #include <iostream>
 using namespace std;
 
-BankAccount_Siddhant::BankAccount_Siddhant()
+BankAccount::BankAccount()
 {
 }
 
 
-BankAccount_Siddhant::~BankAccount_Siddhant()
+BankAccount::~BankAccount()
 {
 }

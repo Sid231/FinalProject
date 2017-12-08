@@ -2,10 +2,10 @@
 #include<iostream>
 using namespace std;
 
-Account_Siddhant::Account_Siddhant(double balance)
+Account::Account(double balance)
 	:cashBalance(balance) {}
 
 
-Account_Siddhant::~Account_Siddhant()
+Account::~Account()
 {
 }

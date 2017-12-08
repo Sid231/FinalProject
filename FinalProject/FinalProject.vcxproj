@@ -113,13 +113,18 @@
     <ClCompile Include="Account_Siddhant.cpp" />
     <ClCompile Include="BankAccount_Siddhant.cpp" />
     <ClCompile Include="Main_Siddhant.cpp" />
+    <ClCompile Include="accountNode_Siddhant.cpp" />
     <ClCompile Include="StockAccount_Siddhant.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account_Siddhant.h" />
     <ClInclude Include="BankAccount_Siddhant.h" />
-    <ClInclude Include="accountNode.h" />
+    <ClInclude Include="accountNode_Siddhant.h" />
     <ClInclude Include="StockAccount_Siddhant.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Result_1.txt" />
+    <Text Include="Result_2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

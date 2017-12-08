@@ -5,14 +5,14 @@
 #include "accountNode.h"
 using namespace std;
 
-accountNode *head = NULL;
 int main() {
 	int choice1 = 0;
 	int choice2 = 0;
 	int choice3 = 0;
 
-	BankAccount_Siddhant bankAccount;
-	StockAccount_Siddhant stockAccount(head);
+	accountNode *head = NULL;
+	BankAccount bankAccount;
+	StockAccount stockAccount(head);
 
 
 	cout << "Welcome to the Account Management System!!" << endl;

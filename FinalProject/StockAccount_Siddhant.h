@@ -7,14 +7,14 @@
 #include "accountNode.h"
 using namespace std;
 
-class StockAccount_Siddhant : public Account_Siddhant
+class StockAccount : public Account
 {
 
 private:
 
 public:
-	StockAccount_Siddhant(accountNode *);
-	~StockAccount_Siddhant();
+	StockAccount(accountNode *);
+	~StockAccount();
 
 	void displayStockPrice(accountNode *);
 

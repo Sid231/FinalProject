@@ -6,14 +6,14 @@
 #include<iostream>
 using namespace std;
 
-class Account_Siddhant
+class Account
 {
 
 private:
 	double cashBalance;
 public:
-	Account_Siddhant(double = 10000.0);
-	~Account_Siddhant();
+	Account(double = 10000.0);
+	~Account();
 
 	double getCashBalance() const;
 	void setCashBalance(double balance) {
