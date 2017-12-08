@@ -13,7 +13,7 @@ class StockAccount_Siddhant : public Account_Siddhant
 private:
 
 public:
-	StockAccount_Siddhant();
+	StockAccount_Siddhant(accountNode *);
 	~StockAccount_Siddhant();
 
 	void displayStockPrice(accountNode *);

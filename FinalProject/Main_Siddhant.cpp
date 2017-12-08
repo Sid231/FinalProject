@@ -12,7 +12,7 @@ int main() {
 	int choice3 = 0;
 
 	BankAccount_Siddhant bankAccount;
-	StockAccount_Siddhant stockAccount;
+	StockAccount_Siddhant stockAccount(head);
 
 
 	cout << "Welcome to the Account Management System!!" << endl;
