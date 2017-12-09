@@ -12,7 +12,7 @@ int main() {
 
 	accountNode *head = NULL;
 	BankAccount bankAccount;
-	StockAccount stockAccount(head);
+	StockAccount stockAccount;
 
 
 	cout << "Welcome to the Account Management System!!" << endl;
@@ -49,7 +49,7 @@ int main() {
 				switch (choice2)
 				{
 				case 1:
-					stockAccount.displayStockPrice(head);
+					stockAccount.displayStockPrice(); 
 					break;
 				case 2:
 					//stockAccount.displayCurrentPortfolio();

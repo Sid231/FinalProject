@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Account_Siddhant.h"
 #include "accountNode_Siddhant.h"
+#include<map>
 using namespace std;
 
 class StockAccount : public Account
@@ -16,11 +17,19 @@ private:
 	accountNode *tailPointer = NULL;
 	accountNode *headPointer = NULL;
 
+	string company;
+	double amount;
+	string date;
+
+	int sizeOfList;
+
+	map<string, double> stockDataMap;
+
 public:
-	StockAccount(accountNode *);
+	StockAccount();
 	~StockAccount();
 
-	void displayStockPrice(accountNode *);
+	void displayStockPrice();
 	void setBalance();
 	double getBalance(); 
 

@@ -4,14 +4,21 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <cstring>
+#include <sstream>
+#include<map>
 using namespace std;
 
-StockAccount::StockAccount(accountNode *head){
+StockAccount::StockAccount(){
 
 	tailPointer = NULL;
 	headPointer = NULL;
 	ifstream file;
+	string data;
+	stringstream stream;
+	ifstream listSizeInputStream;
+	string content = "";
+	double amount = 0.0;
+	int i = 0;
 
 	//Setting the cash balance
 	setBalance();
@@ -23,10 +30,31 @@ StockAccount::StockAccount(accountNode *head){
 		file.open("Result_2.txt");
 	}
 
-	if (file.is_open) {
-
+	if (file.is_open()) {
+		while (!file.eof()) {
+			getline(file, data);
+			stream << data;
+			stream >> company >> amount;
+			stockDataMap.insert(pair<string, double>(company, amount));
+			stream.str("");
+			stream.clear();
+		}
 	}
+	file.close();
 
+	listSizeInputStream.open("stock_list_size_data.txt");
+	for (i = 0; listSizeInputStream.eof() != true; i++) {
+		content += listSizeInputStream.get();
+	}
+	i--;
+	content.erase(content.end() - 1);
+	if ((content != "") || (content != " ")) {
+		sizeOfList = stoi(content);
+	}
+	listSizeInputStream.close();
+	if (sizeOfList != 0) {
+		//TODO
+	}
 }
 
 
@@ -34,7 +62,7 @@ StockAccount::~StockAccount()
 {
 }
 
-void StockAccount::displayStockPrice(accountNode *head) {
+void StockAccount::displayStockPrice() {
 
 }
 
@@ -69,5 +97,5 @@ void StockAccount::setBalance() {
 	else {
 		setCashBalance(10000.0);
 	}
-	
+	cashFileStream.close();
 }
