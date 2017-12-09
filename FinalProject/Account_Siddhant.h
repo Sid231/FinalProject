@@ -15,7 +15,9 @@ public:
 	Account(double = 0.0);
 	~Account();
 
-	double getCashBalance() const;
+	double getCashBalance() {
+		return cashBalance;
+	}
 	void setCashBalance(double balance) {
 		cashBalance = balance;
 	}

@@ -11,9 +11,21 @@ StockAccount::StockAccount(accountNode *head){
 
 	tailPointer = NULL;
 	headPointer = NULL;
+	ifstream file;
 
 	//Setting the cash balance
-	retrieveCashBalanceFromFile();
+	setBalance();
+	
+	if (rand()%2 == 0) {
+		file.open("Result_1.txt");
+	}
+	else {
+		file.open("Result_2.txt");
+	}
+
+	if (file.is_open) {
+
+	}
 
 }
 
@@ -26,28 +38,36 @@ void StockAccount::displayStockPrice(accountNode *head) {
 
 }
 
-void StockAccount::retrieveCashBalanceFromFile() {
+//TO GET THE CASH AMOUNT BALANCE
+double StockAccount::getBalance() {
+	return getCashBalance();
+}
 
-	ifstream inFileStream;
-	char *stringBal;
-	char *tempData;
-	inFileStream.open("cashBalance.txt");
+//TO SET THE CASH AMOUNT BALANCE
+void StockAccount::setBalance() {
 
-	if (!inFileStream) {
+	ifstream cashFileStream;
+	string content = "";
+	double amount = 0.0;
+	int i=0;
+
+	cashFileStream.open("cashBalance.txt");
+	if (!cashFileStream) {
 		cerr << "Unable to open the file!!" << endl;
 	}
 
-	while (inFileStream >> tempData) {
-		strcat(stringBal, tempData);
+	for (i = 0; cashFileStream.eof() != true; i++) {
+		content += cashFileStream.get();
 	}
+	i--;
+	content.erase(content.end() - 1);
 
-	if ((stringBal != "") && (stringBal != " ")) {
-		setCashBalance(atof(stringBal));
+	if ((content != "") || (content != " ")) {
+		amount = ::atof(content.c_str());
+		setCashBalance(amount);
 	}
 	else {
 		setCashBalance(10000.0);
 	}
 	
-
-
 }

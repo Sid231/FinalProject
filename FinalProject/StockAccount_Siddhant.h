@@ -21,7 +21,8 @@ public:
 	~StockAccount();
 
 	void displayStockPrice(accountNode *);
-	void retrieveCashBalanceFromFile();
+	void setBalance();
+	double getBalance(); 
 
 };
 

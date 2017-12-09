@@ -2,7 +2,7 @@
 #include "Account_Siddhant.h"
 #include "BankAccount_Siddhant.h"
 #include "StockAccount_Siddhant.h"
-#include "accountNode.h"
+#include "accountNode_Siddhant.h"
 using namespace std;
 
 int main() {
@@ -52,19 +52,19 @@ int main() {
 					stockAccount.displayStockPrice(head);
 					break;
 				case 2:
-					stockAccount.displayCurrentPortfolio();
+					//stockAccount.displayCurrentPortfolio();
 					break;
 				case 3:
-					stockAccount.buyShares();
+					//stockAccount.buyShares();
 					break;
 				case 4:
-					stockAccount.sellShares();
+					//stockAccount.sellShares();
 					break;
 				case 5:
-					stockAccount.viewGraph();
+					//stockAccount.viewGraph();
 					break;
 				case 6:
-					stockAccount.printHistory();
+					//stockAccount.printHistory();
 					break;
 
 				case 7:
@@ -93,18 +93,18 @@ int main() {
 				switch (choice3) {
 
 				case 1:
-					bankAccount.viewBalance();
+					//bankAccount.viewBalance();
 					break;
 				case 2:
-					bankAccount.depositAmount();
+					//bankAccount.depositAmount();
 					//bankAccount.savePortValue();
 					break;
 				case 3:
-					bankAccount.withdrawAmount();
+					//bankAccount.withdrawAmount();
 					//bankAccount.savePortValue();
 					break;
 				case 4:
-					bankAccount.printHistory();
+					//bankAccount.printHistory();
 					break;
 				case 5:
 					break;
