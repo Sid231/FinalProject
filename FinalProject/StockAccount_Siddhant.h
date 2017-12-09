@@ -21,6 +21,10 @@ private:
 	double amount;
 	string date;
 
+	double portValue;
+	double portValue_array[100];
+	int sizeOfPortValueArray;
+
 	int sizeOfList;
 
 	map<string, double> stockDataMap;
@@ -33,6 +37,7 @@ public:
 	void setBalance();
 	double getBalance(); 
 	void displayCurrentPortfolio();
+	void sortList();
 
 };
 

@@ -120,5 +120,53 @@ void StockAccount::setBalance() {
 }
 
 void StockAccount::displayCurrentPortfolio() {
+	accountNode *currentNode = headPointer;
+	setBalance();
+	double stockValue = 0.0;
+	
+	while (currentNode != NULL) {
+		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); ++it) {
+			if (currentNode->company == it->first) {
+				currentNode->amountPerShare = it->second;
+				currentNode->currentPortfolioNodeVal = currentNode->numberOfShares * currentNode->amountPerShare;
+			}
+		}
+		currentNode = currentNode->next;
+	}
+	this->sortList();
+
+	if (sizeOfList > 0) {
+		cout << left << setw(20) << "Company-Symbol";
+		cout << left << setw(20) << "Shares";
+		cout << left << setw(20) << "Price per Share (in $)";
+		cout << left << setw(20) << "Total value (in $)" << endl;
+
+		currentNode = headPointer;
+		while (currentNode != NULL) {
+			cout << left << setw(20) << currentNode->company;
+			cout << left << setw(20) << currentNode->numberOfShares;
+			cout << left << setw(20) << currentNode->amountPerShare;
+			cout << left << setw(20) << currentNode->currentPortfolioNodeVal << endl;
+
+			stockValue = stockValue + currentNode->currentPortfolioNodeVal;
+			currentNode = currentNode->next;
+		}
+
+		portValue = getCashBalance() + stockValue;
+		cout << "Cash Balance is : $" << getCashBalance() << endl;
+		cout << "Stock Balance is : $" << stockValue << endl;
+		cout << "Total Portfolio value is : $" << portValue << endl;
+	
+		portValue_array[sizeOfPortValueArray] = portValue;
+		sizeOfPortValueArray++;
+	}
+
+	if (sizeOfList == 0) {
+		portValue = getCashBalance();
+		cout << "Shares are not available!!" << endl;
+	}
+}
+
+void StockAccount::sortList() {
 
 }
