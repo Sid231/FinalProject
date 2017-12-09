@@ -12,7 +12,7 @@ class Account
 private:
 	double cashBalance;
 public:
-	Account(double = 10000.0);
+	Account(double = 0.0);
 	~Account();
 
 	double getCashBalance() const;

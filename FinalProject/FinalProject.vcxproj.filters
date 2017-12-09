@@ -48,5 +48,8 @@
     <Text Include="Result_2.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="cashBalance.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

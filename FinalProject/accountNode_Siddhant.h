@@ -16,6 +16,7 @@ private:
 	accountNode *next;
 
 public:
+	friend class StockAccount;
 	accountNode(string, double, string);
 };
 

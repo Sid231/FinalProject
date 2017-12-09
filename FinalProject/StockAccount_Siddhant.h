@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "Account_Siddhant.h"
-#include "accountNode.h"
+#include "accountNode_Siddhant.h"
 using namespace std;
 
 class StockAccount : public Account
@@ -12,11 +12,16 @@ class StockAccount : public Account
 
 private:
 
+	accountNode *previousPointer = NULL;
+	accountNode *tailPointer = NULL;
+	accountNode *headPointer = NULL;
+
 public:
 	StockAccount(accountNode *);
 	~StockAccount();
 
 	void displayStockPrice(accountNode *);
+	void retrieveCashBalanceFromFile();
 
 };
 

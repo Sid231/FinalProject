@@ -1,26 +1,19 @@
 #include "StockAccount_Siddhant.h"
+#include "accountNode_Siddhant.h"
+#include <stdlib.h>
 #include <iostream>
 #include <fstream>
-#include "accountNode.h"
+#include <string>
+#include <cstring>
 using namespace std;
 
 StockAccount::StockAccount(accountNode *head){
 
-	string company = "";
-	double amount = 0.0;
-	string date = "";
-	string filename = "Result_1.txt";
-	ifstream din;
-	din.open(filename.c_str());
-	if (din.fail()){
-		cerr << "Could not open file \n";
-	}
-	while (!din.eof()){
-		din >> company >> amount >> date;
-		accountNode *temp = new accountNode(company, amount, date);
-		temp->setNext(head);
-		head = temp;
-	}
+	tailPointer = NULL;
+	headPointer = NULL;
+
+	//Setting the cash balance
+	retrieveCashBalanceFromFile();
 
 }
 
@@ -30,5 +23,31 @@ StockAccount::~StockAccount()
 }
 
 void StockAccount::displayStockPrice(accountNode *head) {
+
+}
+
+void StockAccount::retrieveCashBalanceFromFile() {
+
+	ifstream inFileStream;
+	char *stringBal;
+	char *tempData;
+	inFileStream.open("cashBalance.txt");
+
+	if (!inFileStream) {
+		cerr << "Unable to open the file!!" << endl;
+	}
+
+	while (inFileStream >> tempData) {
+		strcat(stringBal, tempData);
+	}
+
+	if ((stringBal != "") && (stringBal != " ")) {
+		setCashBalance(atof(stringBal));
+	}
+	else {
+		setCashBalance(10000.0);
+	}
+	
+
 
 }
