@@ -2,6 +2,7 @@
 #include "accountNode_Siddhant.h"
 #include <stdlib.h>
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -64,6 +65,24 @@ StockAccount::~StockAccount()
 
 void StockAccount::displayStockPrice() {
 
+	string companySymbol;
+	cout << "Enter the company symbol of the stock you want to check" << endl;
+	cin >> companySymbol;
+	bool symbolFound = false;
+
+	for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); ++it) {
+		if (companySymbol == it->first) {
+			cout << left << setw(20) << "Company-Symbol";
+			cout << left << setw(20) << "Price per Share"<<endl;
+			cout << left << setw(20) << it->first;
+			cout << left << setw(20) << it->second << endl;
+			symbolFound = true;
+		}
+	}
+
+	if (symbolFound == false) {
+		cout << "Data not found in the database of the Stock data" << endl;
+	}
 }
 
 //TO GET THE CASH AMOUNT BALANCE
@@ -98,4 +117,8 @@ void StockAccount::setBalance() {
 		setCashBalance(10000.0);
 	}
 	cashFileStream.close();
+}
+
+void StockAccount::displayCurrentPortfolio() {
+
 }

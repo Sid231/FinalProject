@@ -52,7 +52,7 @@ int main() {
 					stockAccount.displayStockPrice(); 
 					break;
 				case 2:
-					//stockAccount.displayCurrentPortfolio();
+					stockAccount.displayCurrentPortfolio();
 					break;
 				case 3:
 					//stockAccount.buyShares();

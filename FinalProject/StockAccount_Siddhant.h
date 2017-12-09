@@ -32,6 +32,7 @@ public:
 	void displayStockPrice();
 	void setBalance();
 	double getBalance(); 
+	void displayCurrentPortfolio();
 
 };
 
