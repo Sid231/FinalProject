@@ -134,7 +134,7 @@ void StockAccount::displayCurrentPortfolio() {
 		}
 		currentNode = currentNode->next;
 	}
-	this->sortList();
+	this->sortLinkedListStockData();
 
 	if (sizeOfList > 0) {
 		cout << left << setw(20) << "Company-Symbol";
@@ -456,7 +456,7 @@ void StockAccount::sellShares() {
 
 }
 
-bool StockAccount::sortList() {
+bool StockAccount::sortLinkedListStockData() {
 
 	accountNode *traversalNode1 = headPointer;
 

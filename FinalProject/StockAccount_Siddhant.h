@@ -39,7 +39,7 @@ public:
 	void displayCurrentPortfolio();
 	void buyShares();
 	void sellShares();
-	void sortList();
+	bool sortLinkedListStockData();
 
 };
 
