@@ -38,6 +38,7 @@ public:
 	double getBalance(); 
 	void displayCurrentPortfolio();
 	void buyShares();
+	void sellShares();
 	void sortList();
 
 };

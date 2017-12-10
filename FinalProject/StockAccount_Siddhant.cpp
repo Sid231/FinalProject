@@ -303,6 +303,44 @@ void StockAccount::buyShares() {
 		cout << "The ticker symbol of the stock you entered is invalid!" << endl;
 		return;
 	}
+}
 
+void StockAccount::sellShares() {
+
+	string companySymbol;
+	bool validCompanySymbolData = false;
+	int numberOfShares;
+	double maxAmtPay;
+	double shareValueOfCompany;
+	double totalAmount;
+	ofstream cashFileOutputStream;
+	ofstream bankTransationOutputStream;
+	ofstream stockTransactionOutputStream;
+	accountNode *tempNode = headPointer;
+
+	cout << "Enter the ticker symbol of the stock you want to sell" << endl;
+	cin >> companySymbol;
+
+	while (tempNode != NULL) {
+		if (tempNode->company == companySymbol) {
+			validCompanySymbolData = true;
+		}
+	}
+
+	if (validCompanySymbolData == true) {
+		
+		cout << "Enter the number of shares you want to buy" << endl;
+		cin >> numberOfShares;
+		cout << "Enter the maximum limit you are willing to pay per share" << endl;
+		cin >> maxAmtPay;
+
+		setBalance();
+
+
+	}
+	else {
+		cout << "The ticker symbol of the stock you entered is invalid!" << endl;
+		return;
+	}
 
 }

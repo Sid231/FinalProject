@@ -58,7 +58,7 @@ int main() {
 					stockAccount.buyShares();
 					break;
 				case 4:
-					//stockAccount.sellShares();
+					stockAccount.sellShares();
 					break;
 				case 5:
 					//stockAccount.viewGraph();
