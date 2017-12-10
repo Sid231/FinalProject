@@ -11,7 +11,7 @@ class accountNode {
 private:
 	string company;											//symbol
 	int numberOfShares;										//number of shares
-	double amount;
+	double amountPerShareForSorting;						//price per share for sorting
 	double amountPerShare;									//price per share
 	double currentPortfolioNodeVal;							//total value of the stock
 	string date;

@@ -458,4 +458,24 @@ void StockAccount::sellShares() {
 
 void StockAccount::sortList() {
 
+	accountNode *traversalNode1 = headPointer;
+
+	while (traversalNode1 != NULL) {
+
+		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); ++it) {
+			if (traversalNode1->company == it->first) {
+				traversalNode1->amountPerShareForSorting = it->second;
+				traversalNode1->currentPortfolioNodeVal = traversalNode1->numberOfShares * traversalNode1->amountPerShareForSorting;
+			}
+			traversalNode1 = traversalNode1->next;
+		}
+
+		accountNode  *traversalNode2 = headPointer;
+
+		if (traversalNode2 != NULL) {
+			
+		}
+
+	}
+
 }
