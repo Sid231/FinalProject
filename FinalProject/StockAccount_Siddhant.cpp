@@ -243,7 +243,7 @@ void StockAccount::buyShares() {
 
 			//WRITE THE TRANSACTION TO STOCK_TRANSACTION_HISTORY.TXT FILE
 			stockTransactionOutputStream.open("stock_transaction_history.txt");
-			stockTransactionOutputStream << left << setw(25) << "Purchase";
+			stockTransactionOutputStream << left << setw(25) << "Buy";
 			stockTransactionOutputStream << left << setw(25) << companySymbol;
 			stockTransactionOutputStream << left << setw(25) << numberOfShares;
 			stockTransactionOutputStream << left << setw(25) << shareValueOfCompany;
@@ -310,7 +310,7 @@ void StockAccount::sellShares() {
 	string companySymbol;
 	bool validCompanySymbolData = false;
 	int numberOfShares;
-	double maxAmtPay;
+	double minAmtPay;
 	double shareValueOfCompany;
 	double totalAmount;
 	ofstream cashFileOutputStream;
@@ -331,10 +331,85 @@ void StockAccount::sellShares() {
 		
 		cout << "Enter the number of shares you want to buy" << endl;
 		cin >> numberOfShares;
-		cout << "Enter the maximum limit you are willing to pay per share" << endl;
-		cin >> maxAmtPay;
+		cout << "Enter the minimum limit you are willing to pay per share" << endl;
+		cin >> minAmtPay;
 
-		setBalance();
+		if (sizeOfList > 0) {
+			accountNode *traversalNode;
+			while (traversalNode != NULL) {
+				if (traversalNode -> company == companySymbol) {
+					if (traversalNode->numberOfShares <= numberOfShares) {
+						traversalNode->numberOfShares = traversalNode->numberOfShares - numberOfShares;
+						for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); ++it) {
+							if (companySymbol == it->first) {
+								if (minAmtPay > it->second) {
+									cout << "Minimum limit is more than the current stock share value!" << endl;
+									return;
+								}
+								shareValueOfCompany = it->second;
+							}
+						}
+
+						setBalance();
+						totalAmount = numberOfShares * shareValueOfCompany;
+						setCashBalance(getCashBalance() + totalAmount);
+
+						//STOCKS PURCHASING SUCCESS STATEMENTS
+						cout << "You sold the stocks of " << companySymbol << endl;
+						cout << "The number of shares you sold are " << numberOfShares << " and the total amount you earned for those number of shares is " << totalAmount << endl;
+
+						//GENERATE THE TIME STAMP OF THE PURCHASE OF STOCKS
+						time_t timev;
+						struct tm now;
+						char timeBuffer[100];
+						time(&timev);
+						localtime_s(&now, &timev);
+						strftime(timeBuffer, 100, "%d-%m-%Y %I:%M:%S", &now);
+						string str(timeBuffer);
+
+						//UPDATING THE AMOUNT BACK IN THE CASHBALANCE.TXT FILE
+						cashFileOutputStream.open("cashBalance.txt");
+						cashFileOutputStream << getCashBalance();
+						cashFileOutputStream.close();
+
+						//WRITE THE TRANSACTION TO STOCK_TRANSACTION_HISTORY.TXT FILE
+						stockTransactionOutputStream.open("stock_transaction_history.txt");
+						stockTransactionOutputStream << left << setw(25) << "Sell";
+						stockTransactionOutputStream << left << setw(25) << companySymbol;
+						stockTransactionOutputStream << left << setw(25) << numberOfShares;
+						stockTransactionOutputStream << left << setw(25) << shareValueOfCompany;
+						stockTransactionOutputStream << left << setw(25) << totalAmount;
+						stockTransactionOutputStream << left << setw(25) << str;
+						stockTransactionOutputStream.close();
+
+						//WRITE THE TRANSACTION TO BANK_TRANSACTION_HISTORY.TXT FILE
+						bankTransationOutputStream.open("bank_transaction_history.txt");
+						bankTransationOutputStream << left << setw(25) << "Debited to Stock Account";
+						bankTransationOutputStream << left << setw(25) << "$";
+						bankTransationOutputStream << left << setw(25) << totalAmount;
+						bankTransationOutputStream << left << setw(25) << str;
+						bankTransationOutputStream << left << setw(25) << "$" << getCashBalance();
+						bankTransationOutputStream.close();
+
+						//UPDATE LINKED LIST
+						//THE LINKEDLIST ITEM NEEDS TO BE DELETED IF THE NUMBER OF SHARES BECOME 0 ELSE NO UPDATE IS REQUIRED
+
+						if (traversalNode->numberOfShares == 0) {
+							//CASE 1: IF CURRENT NODE IS HEAD
+							if (traversalNode == headPointer) {
+								//
+							}
+							//CASE 2: IF CURRENT NODE IS TAIL
+							//CASE 3: IF CURRENT NODE IS ANYWHERE IN BETWEEN
+						}
+					}
+					else {
+						cout << "Number of shares entered is more than what is purchased!" << endl;
+						return;
+					}
+				}
+			}
+		}
 
 
 	}
