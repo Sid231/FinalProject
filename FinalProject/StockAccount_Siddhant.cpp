@@ -72,7 +72,7 @@ void StockAccount::displayStockPrice() {
 	cin >> companySymbol;
 	bool symbolFound = false;
 
-	for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); ++it) {
+	for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 		if (companySymbol == it->first) {
 			cout << left << setw(20) << "Company-Symbol";
 			cout << left << setw(20) << "Price per Share"<<endl;
@@ -127,7 +127,7 @@ void StockAccount::displayCurrentPortfolio() {
 	double stockValue = 0.0;
 	
 	while (currentNode != NULL) {
-		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); ++it) {
+		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 			if (currentNode->company == it->first) {
 				currentNode->amountPerShare = it->second;
 				currentNode->currentPortfolioNodeVal = currentNode->numberOfShares * currentNode->amountPerShare;
@@ -184,7 +184,7 @@ void StockAccount::buyShares() {
 	cout << "Enter the ticker symbol of the stock you want to buy" << endl;
 	cin >> companySymbol;
 
-	for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); ++it) {
+	for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 		if (companySymbol == it->first) {
 			validCompanySymbolData = true;
 			break;
@@ -199,7 +199,7 @@ void StockAccount::buyShares() {
 
 		setBalance();
 
-		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); ++it) {
+		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 			if (companySymbol == it->first) {
 				shareValueOfCompany = it->second;
 			}
@@ -337,7 +337,7 @@ void StockAccount::sellShares() {
 				if (traversalNode -> company == companySymbol) {
 					if (traversalNode->numberOfShares <= numberOfShares) {
 						traversalNode->numberOfShares = traversalNode->numberOfShares - numberOfShares;
-						for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); ++it) {
+						for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 							if (companySymbol == it->first) {
 								if (minAmtPay > it->second) {
 									cout << "Minimum limit is more than the current stock share value!" << endl;
@@ -463,7 +463,7 @@ bool StockAccount::sortLinkedListStockData() {
 
 	while (traversalNode1 != NULL) {
 
-		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); ++it) {
+		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 			if (traversalNode1->company == it->first) {
 				traversalNode1->amountPerShareForSorting = it->second;
 				traversalNode1->currentPortfolioNodeVal = traversalNode1->numberOfShares * traversalNode1->amountPerShareForSorting;
@@ -564,7 +564,7 @@ void StockAccount::retrieveDataToLinkedList(){
 	}
 	savePortfolioInputStream.close();
 
-	for (std::map<string, int>::iterator it = portfolioDataMap.begin(); it != portfolioDataMap.end(); it++) {
+	for (std::map<string, int>::iterator it = portfolioDataMap.begin(); it != portfolioDataMap.end(); ++it) {
 		accountNode *newNode = new accountNode();
 		newNode->company = it->first;
 		newNode->numberOfShares = it->second;
@@ -601,4 +601,52 @@ void StockAccount::retrieveDataToLinkedList(){
 		traversalNode = traversalNode->next;
 	}
 	portValue += getCashBalance();
+}
+
+void StockAccount::setPortfolioValue() {
+
+	ofstream savePortfolioOutputStream;
+
+	//CAPTURE TIMESTAMP
+	time_t timev;
+	struct tm now;
+	char timeBuffer[100];
+	time(&timev);
+	localtime_s(&now, &timev);
+	strftime(timeBuffer, 100, "%d-%m-%Y %I:%M:%S", &now);
+	string str(timeBuffer);
+
+	if (sizeOfList == 0) {
+		portValue = getCashBalance();
+	}
+	savePortfolioOutputStream.open("port_value_data.txt");
+	savePortfolioOutputStream << portValue << "\t" << str << endl;
+	savePortfolioOutputStream.close();
+
+}
+
+void StockAccount::retrievePortfolioValue() {
+	
+	ifstream savePortfolioInputStream;
+	string portfolioData, tempData;
+	stringstream stream;
+
+	savePortfolioInputStream.open("port_value_data.txt");
+	if (savePortfolioInputStream.is_open()) {
+		while (!savePortfolioInputStream.eof()) {
+			getline(savePortfolioInputStream, portfolioData);
+			stream << portfolioData;
+			stream >> portValue_array[sizeOfPortValueArray] >> timeStamp_array[sizeOfPortValueArray] >> tempData;
+			if (timeStamp_array[sizeOfPortValueArray] == "") {
+				continue;
+			}
+			else {
+				timeStamp_array[sizeOfPortValueArray].append(" ");
+				timeStamp_array[sizeOfPortValueArray].append(tempData);
+			}
+			sizeOfPortValueArray++;
+			stream.clear();
+		}
+	}
+	savePortfolioInputStream.close();
 }

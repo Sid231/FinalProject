@@ -23,6 +23,7 @@ private:
 
 	double portValue;
 	double portValue_array[100];
+	string timeStamp_array[100];
 	int sizeOfPortValueArray;
 
 	int sizeOfList;
@@ -43,6 +44,8 @@ public:
 	bool sortLinkedListStockData();
 	void retrieveDataToLinkedList();
 	void savePortfolioDataToFile();
+	void retrievePortfolioValue();
+	void setPortfolioValue();
 
 };
 
