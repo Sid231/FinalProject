@@ -168,10 +168,6 @@ void StockAccount::displayCurrentPortfolio() {
 	}
 }
 
-void StockAccount::sortList() {
-
-}
-
 void StockAccount::buyShares() {
 
 	string companySymbol;
@@ -457,5 +453,9 @@ void StockAccount::sellShares() {
 		cout << "The ticker symbol of the stock you entered is invalid!" << endl;
 		return;
 	}
+
+}
+
+void StockAccount::sortList() {
 
 }
