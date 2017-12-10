@@ -55,7 +55,7 @@ int main() {
 					stockAccount.displayCurrentPortfolio();
 					break;
 				case 3:
-					//stockAccount.buyShares();
+					stockAccount.buyShares();
 					break;
 				case 4:
 					//stockAccount.sellShares();

@@ -2,6 +2,7 @@
 #include "accountNode_Siddhant.h"
 #include <stdlib.h>
 #include <iostream>
+#include<time.h>
 #include <iomanip>
 #include <fstream>
 #include <string>
@@ -168,5 +169,111 @@ void StockAccount::displayCurrentPortfolio() {
 }
 
 void StockAccount::sortList() {
+
+}
+
+void StockAccount::buyShares() {
+
+	string companySymbol;
+	bool validCompanySymbolData = false;
+	int numberOfShares;
+	double maxAmtPay;
+	double shareValueOfCompany;
+	double totalAmount;
+	ofstream cashFileOutputStream;
+	ofstream bankTransationOutputStream;
+	ofstream stockTransactionOutputStream;
+
+	cout << "Enter the ticker symbol of the stock you want to buy" << endl;
+	cin >> companySymbol;
+
+	for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); ++it) {
+		if (companySymbol == it->first) {
+			validCompanySymbolData = true;
+			break;
+		}
+	}
+
+	if (validCompanySymbolData == true) {
+		cout << "Enter the number of shares you want to buy" << endl;
+		cin >> numberOfShares;
+		cout << "Enter the maximum limit you are willing to pay per share" << endl;
+		cin >> maxAmtPay;
+
+		setBalance();
+
+		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); ++it) {
+			if (companySymbol == it->first) {
+				shareValueOfCompany = it->second;
+			}
+		}
+
+		if (maxAmtPay >= shareValueOfCompany) {
+			totalAmount = numberOfShares * shareValueOfCompany;
+		}
+		else {
+			cout << "The max limit value entered is less than the value of the stock. Sorry you cant buy the stock with this amount!" << endl;
+		}
+
+		if (totalAmount > getCashBalance()) {
+			cout << "Insufficient balance in your account! Please check again later!" << endl;
+			return;
+		}
+		else {
+			
+			//STOCKS PURCHASING SUCCESS STATEMENTS
+			cout << "Thanks for purchasing the stocks of " << companySymbol << endl;
+			cout << "The number of shares you purchased are " << numberOfShares << " and the total amount you paid for those number of shares is " << totalAmount << endl;
+
+			//GENERATE THE TIME STAMP OF THE PURCHASE OF STOCKS
+			time_t timev;
+			struct tm now;
+			char timeBuffer[100];
+			time(&timev);
+			localtime_s(&now,&timev);
+			strftime(timeBuffer, 100, "%d-%m-%Y %I:%M:%S", &now);
+			string str(timeBuffer);
+
+
+			//UPDATING THE AMOUNT BACK IN THE CASHBALANCE.TXT FILE
+			setCashBalance(getCashBalance() - totalAmount);
+			cashFileOutputStream.open("cashBalance.txt");
+			cashFileOutputStream << getCashBalance();
+			cashFileOutputStream.close();
+
+			//WRITE THE TRANSACTION TO STOCK_TRANSACTION_HISTORY.TXT FILE
+			stockTransactionOutputStream.open("stock_transaction_history.txt");
+			stockTransactionOutputStream << left << setw(25) << "Purchase";
+			stockTransactionOutputStream << left << setw(25) << companySymbol;
+			stockTransactionOutputStream << left << setw(25) << numberOfShares;
+			stockTransactionOutputStream << left << setw(25) << shareValueOfCompany;
+			stockTransactionOutputStream << left << setw(25) << totalAmount;
+			stockTransactionOutputStream << left << setw(25) << str;
+			stockTransactionOutputStream.close();
+
+			//WRITE THE TRANSACTION TO BANK_TRANSACTION_HISTORY.TXT FILE
+			bankTransationOutputStream.open("bank_transaction_history.txt");
+			bankTransationOutputStream << left << setw(25) << "Debited to Stock Account";
+			bankTransationOutputStream << left << setw(25) << "$";
+			bankTransationOutputStream << left << setw(25) << totalAmount;
+			bankTransationOutputStream << left << setw(25) << str;
+			bankTransationOutputStream << left << setw(25) << "$" << getCashBalance();
+			bankTransationOutputStream.close();
+
+			//UPDATE LINKEDLIST
+			accountNode *newNode;
+			if ((headPointer == NULL) && (tailPointer == NULL)) {
+				
+
+			}
+
+		}
+
+	}
+	else{
+		cout << "The ticker symbol of the stock you entered is invalid!" << endl;
+		return;
+	}
+
 
 }

@@ -14,8 +14,8 @@ class StockAccount : public Account
 private:
 
 	accountNode *previousPointer = NULL;
-	accountNode *tailPointer = NULL;
-	accountNode *headPointer = NULL;
+	accountNode *tailPointer;
+	accountNode *headPointer;
 
 	string company;
 	double amount;
@@ -37,6 +37,7 @@ public:
 	void setBalance();
 	double getBalance(); 
 	void displayCurrentPortfolio();
+	void buyShares();
 	void sortList();
 
 };
