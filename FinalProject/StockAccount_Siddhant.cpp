@@ -534,13 +534,35 @@ void StockAccount::savePortfolioDataToFile() {
 	accountNode *traversalNode = headPointer;
 	ofstream savePortfolioOutputStream;
 	savePortfolioOutputStream.open("portfolioFile.txt");
-	while (traversalNode != NULL) {
-		savePortfolioOutputStream << traversalNode->company << "\t" << traversalNode->numberOfShares << endl;
-		traversalNode = traversalNode->next;
+	if (savePortfolioOutputStream.is_open()) {
+		while (traversalNode != NULL) {
+			savePortfolioOutputStream << traversalNode->company << "\t" << traversalNode->numberOfShares << endl;
+			traversalNode = traversalNode->next;
+		}
 	}
 	savePortfolioOutputStream.close();
 }
 
 void StockAccount::retrieveDataToLinkedList(){
+	
+	ifstream savePortfolioInputStream;
+	stringstream stream;
+	string data;
+	string comapnyNameTextData;
+	int numOfSharesTextData;
+
+	savePortfolioInputStream.open("portfolioFile.txt");
+
+	if (savePortfolioInputStream.is_open()) {
+		while (!savePortfolioInputStream.eof()) {
+			getline(savePortfolioInputStream, data);
+			stream << data;
+			stream >> comapnyNameTextData >> numOfSharesTextData;
+			portfolioDataMap.insert(pair<string,int>(comapnyNameTextData, numOfSharesTextData));
+			stream.clear();
+		}
+	}
+	savePortfolioInputStream.close();
+
 
 }

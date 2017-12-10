@@ -28,6 +28,7 @@ private:
 	int sizeOfList;
 
 	map<string, double> stockDataMap;
+	map<string, int> portfolioDataMap;
 
 public:
 	StockAccount();
