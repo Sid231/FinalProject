@@ -55,6 +55,7 @@ StockAccount::StockAccount(){
 	}
 	listSizeInputStream.close();
 	if (sizeOfList != 0) {
+		this->retrieveDataToLinkedList();
 		//TODO
 	}
 }
@@ -526,4 +527,20 @@ bool StockAccount::sortLinkedListStockData() {
 		}
 	}
 	return true;
+}
+
+void StockAccount::savePortfolioDataToFile() {
+	
+	accountNode *traversalNode = headPointer;
+	ofstream savePortfolioOutputStream;
+	savePortfolioOutputStream.open("portfolioFile.txt");
+	while (traversalNode != NULL) {
+		savePortfolioOutputStream << traversalNode->company << "\t" << traversalNode->numberOfShares << endl;
+		traversalNode = traversalNode->next;
+	}
+	savePortfolioOutputStream.close();
+}
+
+void StockAccount::retrieveDataToLinkedList(){
+
 }

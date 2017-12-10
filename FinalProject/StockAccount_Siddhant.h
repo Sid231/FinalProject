@@ -40,6 +40,8 @@ public:
 	void buyShares();
 	void sellShares();
 	bool sortLinkedListStockData();
+	void retrieveDataToLinkedList();
+	void savePortfolioDataToFile();
 
 };
 
