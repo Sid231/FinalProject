@@ -474,6 +474,16 @@ void StockAccount::sortList() {
 
 		if (traversalNode2 != NULL) {
 			
+			accountNode *prevTempPointer = 0;
+			accountNode *sortTempPointer = NULL;
+			bool isSwapNeeded = false;
+
+			for (int i = 0; i < sizeOfList; i++) {
+				while (traversalNode2->next != 0) {
+					
+				}
+			}
+
 		}
 
 	}
