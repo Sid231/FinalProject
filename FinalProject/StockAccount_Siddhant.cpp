@@ -456,7 +456,7 @@ void StockAccount::sellShares() {
 
 }
 
-void StockAccount::sortList() {
+bool StockAccount::sortList() {
 
 	accountNode *traversalNode1 = headPointer;
 
@@ -475,17 +475,55 @@ void StockAccount::sortList() {
 		if (traversalNode2 != NULL) {
 			
 			accountNode *prevTempPointer = 0;
-			accountNode *sortTempPointer = NULL;
+			accountNode *nextTempPointer = NULL;
 			bool isSwapNeeded = false;
 
 			for (int i = 0; i < sizeOfList; i++) {
+
 				while (traversalNode2->next != 0) {
 					
+					nextTempPointer = traversalNode2->next;
+					if (traversalNode2->currentPortfolioNodeVal < nextTempPointer->currentPortfolioNodeVal) {
+						
+						nextTempPointer->prev = traversalNode2->prev;
+						traversalNode2->prev = nextTempPointer;
+						isSwapNeeded = true;
+						traversalNode2->next = nextTempPointer->next;
+
+						if (traversalNode2->next != NULL) {
+							traversalNode2->next->prev = traversalNode2;
+						}
+						nextTempPointer->next = traversalNode2;
+						if (prevTempPointer != 0) {
+							prevTempPointer->next = nextTempPointer;
+						}
+						prevTempPointer = nextTempPointer;
+						if (headPointer == traversalNode2) {
+							headPointer = nextTempPointer;
+						}
+						if (traversalNode2->next == 0) {
+							tailPointer = traversalNode2;
+						}
+					}
+					else {
+						prevTempPointer = traversalNode2;
+						traversalNode2 = traversalNode2->next;
+					}
+				}
+				if (isSwapNeeded = false) {
+					break;
+				}
+				else {
+					prevTempPointer = 0;
+					traversalNode2 = headPointer;
+					isSwapNeeded = false;
 				}
 			}
-
 		}
-
+		else {
+			cout << "Empty list!! Sorry cannot sort at this moment!" << endl;
+			return false;
+		}
 	}
-
+	return true;
 }
