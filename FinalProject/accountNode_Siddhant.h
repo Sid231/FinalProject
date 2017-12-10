@@ -20,7 +20,7 @@ private:
 
 public:
 	friend class StockAccount;
-	accountNode(string, double, string);
+	accountNode();
 };
 
 #endif

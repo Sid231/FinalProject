@@ -51,5 +51,8 @@
     <Text Include="cashBalance.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="portfolioFile.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

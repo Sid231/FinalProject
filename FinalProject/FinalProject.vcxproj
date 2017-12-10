@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="cashBalance.txt" />
+    <Text Include="portfolioFile.txt" />
     <Text Include="Result_1.txt" />
     <Text Include="Result_2.txt" />
   </ItemGroup>

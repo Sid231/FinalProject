@@ -258,7 +258,7 @@ void StockAccount::buyShares() {
 			bankTransationOutputStream.close();
 
 			//UPDATE LINKEDLIST
-			accountNode *newNode;
+			accountNode *newNode = new accountNode();;
 			if ((headPointer == NULL) && (tailPointer == NULL)) {
 				//CREATE THE FIRST NODE : POINT HEAD AND TAIL TO THE SAME NODE
 				tailPointer = newNode;
@@ -332,7 +332,7 @@ void StockAccount::sellShares() {
 		cin >> minAmtPay;
 
 		if (sizeOfList > 0) {
-			accountNode *traversalNode;
+			accountNode *traversalNode = headPointer;
 			while (traversalNode != NULL) {
 				if (traversalNode -> company == companySymbol) {
 					if (traversalNode->numberOfShares <= numberOfShares) {
@@ -564,5 +564,41 @@ void StockAccount::retrieveDataToLinkedList(){
 	}
 	savePortfolioInputStream.close();
 
+	for (std::map<string, int>::iterator it = portfolioDataMap.begin(); it != portfolioDataMap.end(); it++) {
+		accountNode *newNode = new accountNode();
+		newNode->company = it->first;
+		newNode->numberOfShares = it->second;
 
+		//IF THE NEW NODE IS THE FIRST NODE
+		if (previousPointer == NULL) {
+			newNode->prev = NULL;
+			newNode->next = NULL;
+			headPointer = newNode;
+			tailPointer = newNode;
+		}
+		//UPDATE THE ENTRY AT THE END OF THE LIST
+		else {
+			newNode->prev = previousPointer;
+			previousPointer->next = newNode;
+		}
+		previousPointer = newNode;
+		tailPointer = previousPointer;
+	}
+
+	//UPDATE OTHER CONTENTS OF THE LINKEDLIST
+	accountNode *traversalNode = headPointer;
+	while (traversalNode != NULL) {
+		
+		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
+
+			if (traversalNode->company == it->first) {
+				traversalNode->amountPerShareForSorting = it->second;
+				traversalNode->currentPortfolioNodeVal = traversalNode->numberOfShares * traversalNode->amountPerShareForSorting;
+			}
+		}
+
+		portValue = portValue + traversalNode->currentPortfolioNodeVal;
+		traversalNode = traversalNode->next;
+	}
+	portValue += getCashBalance();
 }
