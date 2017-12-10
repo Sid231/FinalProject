@@ -9,11 +9,11 @@ using namespace std;
 class accountNode {
 
 private:
-	string company;
-	int numberOfShares;
+	string company;											//symbol
+	int numberOfShares;										//number of shares
 	double amount;
-	double amountPerShare;
-	double currentPortfolioNodeVal;
+	double amountPerShare;									//price per share
+	double currentPortfolioNodeVal;							//total value of the stock
 	string date;
 	accountNode *prev;
 	accountNode *next;

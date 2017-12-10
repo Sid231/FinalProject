@@ -144,10 +144,10 @@ void StockAccount::displayCurrentPortfolio() {
 
 		currentNode = headPointer;
 		while (currentNode != NULL) {
-			cout << left << setw(20) << currentNode->company;
-			cout << left << setw(20) << currentNode->numberOfShares;
-			cout << left << setw(20) << currentNode->amountPerShare;
-			cout << left << setw(20) << currentNode->currentPortfolioNodeVal << endl;
+			cout << left << setw(20) << currentNode->company;									//print symbol
+			cout << left << setw(20) << currentNode->numberOfShares;							//print number of shares
+			cout << left << setw(20) << currentNode->amountPerShare;							//print price per share
+			cout << left << setw(20) << currentNode->currentPortfolioNodeVal << endl;			//print total value of the stock
 
 			stockValue = stockValue + currentNode->currentPortfolioNodeVal;
 			currentNode = currentNode->next;
@@ -263,10 +263,39 @@ void StockAccount::buyShares() {
 			//UPDATE LINKEDLIST
 			accountNode *newNode;
 			if ((headPointer == NULL) && (tailPointer == NULL)) {
-				
-
+				//CREATE THE FIRST NODE : POINT HEAD AND TAIL TO THE SAME NODE
+				tailPointer = newNode;
+				headPointer = newNode;
+				newNode->company = companySymbol;
+				newNode->numberOfShares = numberOfShares;
+				newNode->amountPerShare = shareValueOfCompany;
 			}
+			else {
+				//UPDATE EXISTING NODES
+				accountNode *tempNode = headPointer;
+				while (tempNode != NULL) {
+					//CHECK IF STOCK ALREADY ADDED BY THE USER IN THE PAST
+					if (companySymbol == tempNode->company) {
+						//THE STOCK WAS ALREADY EXISTING IN THE PAST
+						//UPDATE THE NUMBER OF SHARES
+						tempNode->numberOfShares = tempNode->numberOfShares + numberOfShares;
+						return;
+					}
+					tempNode = tempNode->next;
+				}
 
+				//NEW NODE ADDITION AT THE END OF THE LIST
+				accountNode *tempTailPointer;
+				tempTailPointer = tailPointer;
+				tailPointer->next = newNode;
+				tailPointer = newNode;
+				tailPointer->prev = tempTailPointer;
+				newNode->company = companySymbol;
+				newNode->numberOfShares = numberOfShares;
+				newNode->amountPerShare = shareValueOfCompany;
+			}
+			//UPDATE THE SIZE OF THE LINKED LIST
+			sizeOfList++;
 		}
 
 	}
