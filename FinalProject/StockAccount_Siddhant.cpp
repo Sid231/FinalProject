@@ -397,17 +397,57 @@ void StockAccount::sellShares() {
 						if (traversalNode->numberOfShares == 0) {
 							//CASE 1: IF CURRENT NODE IS HEAD
 							if (traversalNode == headPointer) {
-								//
+								//IF THERE IS ONLY ONE NODE
+								if (traversalNode == tailPointer) {
+									headPointer = NULL;
+									tailPointer = NULL;
+									delete traversalNode;
+									sizeOfList--;
+									return;
+								}
+								accountNode *temporaryPointer1 = traversalNode->next;
+								headPointer = traversalNode->next;
+								temporaryPointer1->prev = headPointer;//temporaryPointer->prev = NULL;?? TODO
+								delete temporaryPointer1;
+								sizeOfList--;
+								return;
 							}
 							//CASE 2: IF CURRENT NODE IS TAIL
+							else if (traversalNode == tailPointer) {
+								//IF THERE IS ONLY ONE NODE
+								if (traversalNode == headPointer) {
+									headPointer = NULL;
+									tailPointer = NULL;
+									delete traversalNode;
+									sizeOfList--;
+									return;
+								}
+								accountNode *temporaryPointer2 = traversalNode->prev;
+								tailPointer = traversalNode->prev;
+								temporaryPointer2->next = tailPointer;//temporaryPointer->next = NULL;?? TODO
+								delete temporaryPointer2;
+								sizeOfList--;
+								return;
+							}
 							//CASE 3: IF CURRENT NODE IS ANYWHERE IN BETWEEN
+							else {
+								accountNode *temporaryPointer3 = traversalNode->prev;
+								accountNode *temporaryPointer4 = traversalNode->next;
+								temporaryPointer3->next = traversalNode->next;
+								temporaryPointer4->prev = traversalNode->prev;
+								delete traversalNode;
+								sizeOfList--;
+								return;
+							}
 						}
+
 					}
 					else {
 						cout << "Number of shares entered is more than what is purchased!" << endl;
 						return;
 					}
 				}
+				traversalNode = traversalNode->next;
 			}
 		}
 
