@@ -64,7 +64,7 @@ int main() {
 					//stockAccount.viewGraph();
 					break;
 				case 6:
-					//stockAccount.printHistory();
+					stockAccount.printHistory();
 					break;
 
 				case 7:

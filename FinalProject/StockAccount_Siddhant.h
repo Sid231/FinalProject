@@ -46,6 +46,7 @@ public:
 	void savePortfolioDataToFile();
 	void retrievePortfolioValue();
 	void setPortfolioValue();
+	void printHistory();
 
 };
 

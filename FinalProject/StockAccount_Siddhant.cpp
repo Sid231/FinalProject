@@ -56,7 +56,7 @@ StockAccount::StockAccount(){
 	listSizeInputStream.close();
 	if (sizeOfList != 0) {
 		this->retrieveDataToLinkedList();
-		//TODO
+		this->retrievePortfolioValue();
 	}
 }
 
@@ -650,3 +650,29 @@ void StockAccount::retrievePortfolioValue() {
 	}
 	savePortfolioInputStream.close();
 }
+
+void StockAccount::printHistory() {
+	
+	ifstream stockTransactionInputStream;
+	string historyData;
+
+	cout << left << setw(10) << "Transaction" << endl;
+	cout << left << setw(10) << "Symbol" << endl;
+	cout << left << setw(10) << "Shares" << endl;
+	cout << left << setw(10) << "Price per Share (in $)" << endl;
+	cout << left << setw(10) << "Value (in $)" << endl;
+	cout << left << setw(10) << "Timestamp" << endl;
+
+	stockTransactionInputStream.open("stock_transaction_history.txt");
+
+	if (stockTransactionInputStream.is_open()) {
+		while (!stockTransactionInputStream.eof()) {
+			while (getline(stockTransactionInputStream,historyData)) {
+				cout << historyData << endl;
+			}
+		}
+	}
+	stockTransactionInputStream.close();
+}
+
+//void StockAccount::plotGraph() {}
