@@ -209,6 +209,7 @@ void StockAccount::buyShares() {
 		}
 		else {
 			cout << "The max limit value entered is less than the value of the stock. Sorry you cant buy the stock with this amount!" << endl;
+			return;
 		}
 
 		if (totalAmount > getCashBalance()) {
