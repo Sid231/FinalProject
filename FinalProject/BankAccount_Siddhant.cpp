@@ -83,6 +83,8 @@ void BankAccount::depositCashAmount(){
 void BankAccount::withdrawCashAmount() {
 
 	cout << "Enter the amount to be withdrawn :";
-	cin>>
+	cin >> withdrawalAmount;
+
+
 
 }
