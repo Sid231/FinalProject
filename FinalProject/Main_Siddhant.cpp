@@ -34,7 +34,6 @@ int main() {
 		case 1:
 			cout << "Stock Portfolio Account" << endl;
 			while (choice2 != 7) {
-				cout << "Stock Portfolio account";
 				cout << "1. Display the price for a Stock Symbol" << endl;
 				cout << "2. Display Current Portfolio" << endl;
 				cout << "3. Buy Shares" << endl;

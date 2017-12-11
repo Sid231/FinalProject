@@ -70,7 +70,6 @@ void StockAccount::displayStockPrice() {
 	string companySymbol;
 	cout << "Enter the company symbol of the stock you want to check" << endl;
 	cin >> companySymbol;
-	bool symbolFound = false;
 
 	for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 		if (companySymbol == it->first) {
@@ -78,13 +77,11 @@ void StockAccount::displayStockPrice() {
 			cout << left << setw(20) << "Price per Share"<<endl;
 			cout << left << setw(20) << it->first;
 			cout << left << setw(20) << it->second << endl;
-			symbolFound = true;
+			return;
 		}
 	}
 
-	if (symbolFound == false) {
-		cout << "Data not found in the database of the Stock data" << endl;
-	}
+	cout << "Data not found in the database of the Stock data" << endl << endl;
 }
 
 //TO GET THE CASH AMOUNT BALANCE
