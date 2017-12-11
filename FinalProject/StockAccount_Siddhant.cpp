@@ -138,8 +138,8 @@ void StockAccount::displayCurrentPortfolio() {
 	if (sizeOfList > 0) {
 		cout << left << setw(20) << "Company-Symbol";
 		cout << left << setw(20) << "Shares";
-		cout << left << setw(20) << "Price per Share (in $)";
-		cout << left << setw(20) << "Total value (in $)" << endl;
+		cout << left << setw(20) << "Price per Share($)";
+		cout << left << setw(20) << "Total value($)" << endl;
 
 		currentNode = headPointer;
 		while (currentNode != NULL) {
@@ -464,11 +464,13 @@ bool StockAccount::sortLinkedListStockData() {
 	while (traversalNode1 != NULL) {
 
 		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
-			if (traversalNode1->company == it->first) {
-				traversalNode1->amountPerShareForSorting = it->second;
-				traversalNode1->currentPortfolioNodeVal = traversalNode1->numberOfShares * traversalNode1->amountPerShareForSorting;
+			if(traversalNode1 != NULL) {
+				if (traversalNode1->company == it->first) {
+					traversalNode1->amountPerShareForSorting = it->second;
+					traversalNode1->currentPortfolioNodeVal = traversalNode1->numberOfShares * traversalNode1->amountPerShareForSorting;
+				}
+				traversalNode1 = traversalNode1->next;
 			}
-			traversalNode1 = traversalNode1->next;
 		}
 
 		accountNode  *traversalNode2 = headPointer;
