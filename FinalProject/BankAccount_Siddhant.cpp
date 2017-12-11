@@ -65,7 +65,7 @@ void BankAccount::depositCashAmount(){
 	cout << "Enter the amount in $ you want to deposit :";
 	cin >> depositAmount;
 	setCashBalance(getCashBalance() + depositAmount);
-	cout << "Congrats! An amount of $" << depositAmount << "is deposited in your account!" << endl;
+	cout << "Congrats! An amount of $" << depositAmount << " is deposited in your account!" << endl;
 
 	//GENERATE THE TIME STAMP 
 	time_t timev;

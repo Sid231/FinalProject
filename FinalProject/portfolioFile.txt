@@ -1,4 +1,0 @@
-IBM	5
-AAPL	2
-DELL	10
-MSFT	2

@@ -1,7 +1,0 @@
-
-Debited to Stock Account $                        593.76                   11-12-2017 10:39:49      $                        9406.24
-Debited to Stock Account $                        61.24                    11-12-2017 10:39:57      $                        9345
-Debited to Stock Account $                        654.8                    11-12-2017 10:40:08      $                        8690.2
-Debited to Stock Account $                        16.29                    11-12-2017 10:41:09      $                        8673.91
-Debited to Stock Account $                        146.61                   11-12-2017 10:41:29      $                        8527.3
-Withdrawal               $                        1000                     11-12-2017 10:43:29      $                        7627.3

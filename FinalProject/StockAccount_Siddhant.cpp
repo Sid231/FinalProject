@@ -670,11 +670,11 @@ void StockAccount::printHistory() {
 	string historyData;
 
 	cout << left << setw(10) << "Transaction";
-	cout << left << setw(10) << "Symbol";
-	cout << left << setw(10) << "Shares";
-	cout << left << setw(10) << "Price per Share (in $)";
-	cout << left << setw(10) << "Value (in $)";
-	cout << left << setw(10) << "Timestamp" << endl;
+	cout << left << setw(15) << "Symbol";
+	cout << left << setw(7) << "Shares";
+	cout << left << setw(15) << "Price per Share($)";
+	cout << left << setw(10) << "Value($)";
+	cout << left << setw(15) << "Timestamp" << endl;
 
 	stockTransactionInputStream.open("stock_transaction_history.txt");
 
