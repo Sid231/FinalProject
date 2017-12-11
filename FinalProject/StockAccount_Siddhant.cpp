@@ -327,6 +327,7 @@ void StockAccount::sellShares() {
 			validCompanySymbolData = true;
 			break;
 		}
+		tempNode = tempNode->next;
 	}
 
 	if (validCompanySymbolData == true) {
@@ -410,8 +411,8 @@ void StockAccount::sellShares() {
 								}
 								accountNode *temporaryPointer1 = traversalNode->next;
 								headPointer = traversalNode->next;
-								temporaryPointer1->prev = headPointer;//temporaryPointer->prev = NULL;?? TODO
-								delete temporaryPointer1;
+								temporaryPointer1->prev = NULL;//temporaryPointer->prev = NULL;?? TODO
+								delete traversalNode;
 								sizeOfList--;
 								updateSizeOfList(sizeOfList);
 								return;
@@ -429,8 +430,8 @@ void StockAccount::sellShares() {
 								}
 								accountNode *temporaryPointer2 = traversalNode->prev;
 								tailPointer = traversalNode->prev;
-								temporaryPointer2->next = tailPointer;//temporaryPointer->next = NULL;?? TODO
-								delete temporaryPointer2;
+								temporaryPointer2->next = NULL;//temporaryPointer->next = NULL;?? TODO
+								delete traversalNode;
 								sizeOfList--;
 								updateSizeOfList(sizeOfList);
 								return;
