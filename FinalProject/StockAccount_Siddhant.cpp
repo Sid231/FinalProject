@@ -238,8 +238,8 @@ void StockAccount::buyShares() {
 			cashFileOutputStream.close();
 
 			//WRITE THE TRANSACTION TO STOCK_TRANSACTION_HISTORY.TXT FILE
-			stockTransactionOutputStream.open("stock_transaction_history.txt");
-			stockTransactionOutputStream << left << setw(25) << "Buy";
+			stockTransactionOutputStream.open("stock_transaction_history.txt",ios::app);
+			stockTransactionOutputStream << endl << left << setw(25) << "Buy";
 			stockTransactionOutputStream << left << setw(25) << companySymbol;
 			stockTransactionOutputStream << left << setw(25) << numberOfShares;
 			stockTransactionOutputStream << left << setw(25) << shareValueOfCompany;
@@ -247,9 +247,13 @@ void StockAccount::buyShares() {
 			stockTransactionOutputStream << left << setw(25) << str;
 			stockTransactionOutputStream.close();
 
+			if (sizeOfList > 0) {
+
+			}
+
 			//WRITE THE TRANSACTION TO BANK_TRANSACTION_HISTORY.TXT FILE
-			bankTransationOutputStream.open("bank_transaction_history.txt");
-			bankTransationOutputStream << left << setw(25) << "Debited to Stock Account";
+			bankTransationOutputStream.open("bank_transaction_history.txt", ios::app);
+			bankTransationOutputStream << endl << left << setw(25) << "Debited to Stock Account";
 			bankTransationOutputStream << left << setw(25) << "$";
 			bankTransationOutputStream << left << setw(25) << totalAmount;
 			bankTransationOutputStream << left << setw(25) << str;
@@ -318,15 +322,16 @@ void StockAccount::sellShares() {
 	cout << "Enter the ticker symbol of the stock you want to sell" << endl;
 	cin >> companySymbol;
 
-	while (tempNode != NULL) {
+ 	while (tempNode != NULL) {
 		if (tempNode->company == companySymbol) {
 			validCompanySymbolData = true;
+			break;
 		}
 	}
 
 	if (validCompanySymbolData == true) {
 		
-		cout << "Enter the number of shares you want to buy" << endl;
+		cout << "Enter the number of shares you want to sell" << endl;
 		cin >> numberOfShares;
 		cout << "Enter the minimum limit you are willing to pay per share" << endl;
 		cin >> minAmtPay;
@@ -335,7 +340,7 @@ void StockAccount::sellShares() {
 			accountNode *traversalNode = headPointer;
 			while (traversalNode != NULL) {
 				if (traversalNode -> company == companySymbol) {
-					if (traversalNode->numberOfShares <= numberOfShares) {
+					if (numberOfShares <= traversalNode->numberOfShares) {
 						traversalNode->numberOfShares = traversalNode->numberOfShares - numberOfShares;
 						for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 							if (companySymbol == it->first) {
@@ -370,8 +375,8 @@ void StockAccount::sellShares() {
 						cashFileOutputStream.close();
 
 						//WRITE THE TRANSACTION TO STOCK_TRANSACTION_HISTORY.TXT FILE
-						stockTransactionOutputStream.open("stock_transaction_history.txt");
-						stockTransactionOutputStream << left << setw(25) << "Sell";
+						stockTransactionOutputStream.open("stock_transaction_history.txt", ios::app);
+						stockTransactionOutputStream << endl << left << setw(25) << "Sell";
 						stockTransactionOutputStream << left << setw(25) << companySymbol;
 						stockTransactionOutputStream << left << setw(25) << numberOfShares;
 						stockTransactionOutputStream << left << setw(25) << shareValueOfCompany;
@@ -380,8 +385,8 @@ void StockAccount::sellShares() {
 						stockTransactionOutputStream.close();
 
 						//WRITE THE TRANSACTION TO BANK_TRANSACTION_HISTORY.TXT FILE
-						bankTransationOutputStream.open("bank_transaction_history.txt");
-						bankTransationOutputStream << left << setw(25) << "Debited to Stock Account";
+						bankTransationOutputStream.open("bank_transaction_history.txt", ios::app);
+						bankTransationOutputStream << endl << left << setw(25) << "Debited to Stock Account";
 						bankTransationOutputStream << left << setw(25) << "$";
 						bankTransationOutputStream << left << setw(25) << totalAmount;
 						bankTransationOutputStream << left << setw(25) << str;
@@ -400,6 +405,7 @@ void StockAccount::sellShares() {
 									tailPointer = NULL;
 									delete traversalNode;
 									sizeOfList--;
+									updateSizeOfList(sizeOfList);
 									return;
 								}
 								accountNode *temporaryPointer1 = traversalNode->next;
@@ -407,6 +413,7 @@ void StockAccount::sellShares() {
 								temporaryPointer1->prev = headPointer;//temporaryPointer->prev = NULL;?? TODO
 								delete temporaryPointer1;
 								sizeOfList--;
+								updateSizeOfList(sizeOfList);
 								return;
 							}
 							//CASE 2: IF CURRENT NODE IS TAIL
@@ -417,6 +424,7 @@ void StockAccount::sellShares() {
 									tailPointer = NULL;
 									delete traversalNode;
 									sizeOfList--;
+									updateSizeOfList(sizeOfList);
 									return;
 								}
 								accountNode *temporaryPointer2 = traversalNode->prev;
@@ -424,6 +432,7 @@ void StockAccount::sellShares() {
 								temporaryPointer2->next = tailPointer;//temporaryPointer->next = NULL;?? TODO
 								delete temporaryPointer2;
 								sizeOfList--;
+								updateSizeOfList(sizeOfList);
 								return;
 							}
 							//CASE 3: IF CURRENT NODE IS ANYWHERE IN BETWEEN
@@ -434,6 +443,7 @@ void StockAccount::sellShares() {
 								temporaryPointer4->prev = traversalNode->prev;
 								delete traversalNode;
 								sizeOfList--;
+								updateSizeOfList(sizeOfList);
 								return;
 							}
 						}
