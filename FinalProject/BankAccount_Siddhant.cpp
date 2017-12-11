@@ -75,7 +75,7 @@ void BankAccount::depositCashAmount(){
 	strftime(timeBuffer, 100, "%d-%m-%Y %I:%M:%S", &now);
 	string str(timeBuffer);
 
-	balanceOutputWriteStream.open("balance_file.txt");
+	balanceOutputWriteStream.open("cashBalance.txt");
 	balanceOutputWriteStream << getCashBalance();
 	balanceOutputWriteStream.close();
 
@@ -109,7 +109,7 @@ void BankAccount::withdrawCashAmount() {
 			strftime(timeBuffer, 100, "%d-%m-%Y %I:%M:%S", &now);
 			string strData(timeBuffer);
 
-			balanceOutputWriteStream.open("balance_file.txt");
+			balanceOutputWriteStream.open("cashBalance.txt");
 			balanceOutputWriteStream << getCashBalance();
 			balanceOutputWriteStream.close();
 
