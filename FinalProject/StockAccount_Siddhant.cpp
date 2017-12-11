@@ -1,4 +1,12 @@
-//MATLAB LIBS
+/*
+NAME: KUMAR SIDDHANT
+DATE: 12/11/2017
+PROJECT: ACCOUNT MANAGEMENT SYSTEM
+FILE: BANKACCOUNT_SIDDHANT.CPP
+*/
+
+
+//MATLAB LIBS START
 #pragma comment(lib,"libmx.lib")
 #pragma comment(lib,"libmex.lib")
 #pragma comment(lib,"libeng.lib")
@@ -8,6 +16,7 @@
 #endif
 #include "mex.h"
 #include<engine.h>
+//MATLAB LIBS END
 
 #include "StockAccount_Siddhant.h"
 #include "accountNode_Siddhant.h"
@@ -22,6 +31,7 @@
 
 using namespace std;
 
+//CONSTRUCTOR
 StockAccount::StockAccount(){
 
 	tailPointer = NULL;
@@ -34,9 +44,10 @@ StockAccount::StockAccount(){
 	double amount = 0.0;
 	int i = 0;
 
-	//Setting the cash balance
+	//SET THE CASH BALANCE
 	setBalance();
 	
+	//RANDOMLY SELECT A FILE TO DO ALL THE OPERATIONS
 	if (rand()%2 == 0) {
 		file.open("Result_1.txt");
 	}
@@ -44,45 +55,61 @@ StockAccount::StockAccount(){
 		file.open("Result_2.txt");
 	}
 
+	//CHECK IF THE FILE IS OPEN
 	if (file.is_open()) {
 		while (!file.eof()) {
+			//READ THE LINE FROM THE FILE
 			getline(file, data);
+			//STORE THE READ DATA IN A STREAM
 			stream << data;
+			//STORE INTO THE COMPANY AND THE AMOUNT VARIABLES
 			stream >> company >> amount;
+			//STORE THE PAIR IN A MAP
 			stockDataMap.insert(pair<string, double>(company, amount));
+			//ALLOCATE A STRING VARIABLE
 			stream.str("");
+			//CLEAR THE STREAM
 			stream.clear();
 		}
 	}
+	//CLOSE THE FILES
 	file.close();
 
+	//GET THE SIZE OF LIST DATA FROM THE stock_list_size_data.txt FILE
 	listSizeInputStream.open("stock_list_size_data.txt");
 	for (i = 0; listSizeInputStream.eof() != true; i++) {
 		content += listSizeInputStream.get();
 	}
 	i--;
+	//ERASE GARBAGE ELEMENT AT THE END
 	content.erase(content.end() - 1);
 	if ((content != "") || (content != " ")) {
 		sizeOfList = stoi(content);
 	}
+	
 	listSizeInputStream.close();
 	if (sizeOfList != 0) {
+		//RETRIEVE DATA FROM FILE TO LINKED LIST IF THERE IS SOME HISTORY
 		this->retrieveDataToLinkedList();
+
+		//RETRIEVE PORTFOLIO DATA VALUES
 		this->retrievePortfolioValue();
 	}
 }
 
-
+//DESTRUCTOR
 StockAccount::~StockAccount()
 {
 }
 
+//DISPLAY THE STOCK PRICES
 void StockAccount::displayStockPrice() {
 
 	string companySymbol;
 	cout << "Enter the company symbol of the stock you want to check" << endl;
 	cin >> companySymbol;
 
+	//ITERATE THROUGH THE MAP OF STOCK DATA
 	for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 		if (companySymbol == it->first) {
 			cout << left << setw(20) << "Company-Symbol";
@@ -92,7 +119,7 @@ void StockAccount::displayStockPrice() {
 			return;
 		}
 	}
-
+	//STOCK DATAASKED FOR IS NOT FOUND
 	cout << "Data not found in the database of the Stock data" << endl << endl;
 }
 
@@ -109,6 +136,7 @@ void StockAccount::setBalance() {
 	double amount = 0.0;
 	int i=0;
 
+	//OPEN cashBalance.txt TO GE THE UPDATED CASH BALANCE AMOUNT IN THE ACCOUNT
 	cashFileStream.open("cashBalance.txt");
 	if (!cashFileStream) {
 		cerr << "Unable to open the file!!" << endl;
@@ -120,6 +148,7 @@ void StockAccount::setBalance() {
 	i--;
 	content.erase(content.end() - 1);
 
+	//IF VALID DATA IS FOUND THEN STORE IT ELSE SET THE CASH BALANCE TO $10000.00
 	if ((content != "") || (content != " ")) {
 		amount = ::atof(content.c_str());
 		setCashBalance(amount);
@@ -130,6 +159,7 @@ void StockAccount::setBalance() {
 	cashFileStream.close();
 }
 
+//DISPLAY THE CURRENT PORTFOLIO
 void StockAccount::displayCurrentPortfolio() {
 	accountNode *currentNode = headPointer;
 	setBalance();
