@@ -112,10 +112,10 @@ void StockAccount::displayStockPrice() {
 	//ITERATE THROUGH THE MAP OF STOCK DATA
 	for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 		if (companySymbol == it->first) {
-			cout << left << setw(20) << "Company-Symbol";
+			cout << endl << left << setw(20) << "Company-Symbol";
 			cout << left << setw(20) << "Price per Share"<<endl;
 			cout << left << setw(20) << it->first;
-			cout << left << setw(20) << it->second << endl;
+			cout << left << setw(20) << it->second << endl << endl;
 			return;
 		}
 	}
@@ -200,7 +200,7 @@ void StockAccount::displayCurrentPortfolio() {
 		portValue = getCashBalance() + stockValue;
 		cout << "Cash Balance is : $" << getCashBalance() << endl;
 		cout << "Stock Balance is : $" << stockValue << endl;
-		cout << "Total Portfolio value is : $" << portValue << endl;
+		cout << "Total Portfolio value is : $" << portValue << endl << endl;
 	
 		//UPDATE THE PORTFOLIO VALUES IN AN ARRAY AND INCREASE THE SIZE OF ARRAY BY 1
 		portValue_array[sizeOfPortValueArray] = portValue;
@@ -273,8 +273,8 @@ void StockAccount::buyShares() {
 		else {
 			
 			//STOCKS PURCHASING SUCCESS STATEMENTS
-			cout << "Thanks for purchasing the stocks of " << companySymbol << endl;
-			cout << "The number of shares you purchased are " << numberOfShares << " and the total amount you paid for those number of shares is " << totalAmount << endl;
+			cout << endl << "Thanks for purchasing the stocks of " << companySymbol << endl;
+			cout << "The number of shares you purchased are " << numberOfShares << " and the total amount you paid for those number of shares is " << totalAmount << endl << endl;
 
 			//GENERATE THE TIME STAMP OF THE PURCHASE OF STOCKS
 			time_t timev;
@@ -413,8 +413,8 @@ void StockAccount::sellShares() {
 						setCashBalance(getCashBalance() + totalAmount);
 
 						//STOCKS PURCHASING SUCCESS STATEMENTS
-						cout << "You sold the stocks of " << companySymbol << endl;
-						cout << "The number of shares you sold are " << numberOfShares << " and the total amount you earned for those number of shares is " << totalAmount << endl;
+						cout << endl << "You sold the stocks of " << companySymbol << endl;
+						cout << "The number of shares you sold are " << numberOfShares << " and the total amount you earned for those number of shares is " << totalAmount << endl << endl;
 
 						//GENERATE THE TIME STAMP OF THE PURCHASE OF STOCKS
 						time_t timev;

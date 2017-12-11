@@ -27,7 +27,7 @@ int main() {
 
 	while (choice1 != 3) {
 
-		cout << "Please select the account to access" << endl;
+		cout << endl << endl << "Please select the account to access" << endl;
 		cout << "1. Stock Portfolio Account" << endl;
 		cout << "2. Bank Account" << endl;
 		cout << "3. Exit" << endl;
@@ -35,13 +35,13 @@ int main() {
 
 		cin >> choice1;
 
-		cout << "Option " << choice1 << endl;
+		cout << endl << "Option " << choice1 << endl;
 
 		switch (choice1) {
 
 		case 1:
 			//STOCK ACCOUNT MENU
-			cout << "Stock Portfolio Account" << endl;
+			cout << endl << "Stock Portfolio Account" << endl;
 			while (choice2 != 7) {
 				cout << "1. Display the price for a Stock Symbol" << endl;
 				cout << "2. Display Current Portfolio" << endl;
@@ -53,7 +53,7 @@ int main() {
 				cout << "Enter Your Choice : ";
 
 				cin >> choice2;
-				cout << "Option " << choice2 << endl;
+				cout << endl << "Option " << choice2 << endl;
 				switch (choice2)
 				{
 				case 1:
@@ -94,7 +94,7 @@ int main() {
 		case 2:
 			while (choice3 != 5) {
 				//BANK ACCOUNT MENU
-				cout << "Bank Account" << endl << endl;
+				cout << endl << "Bank Account" << endl;
 				cout << "Please select an option:" << endl;
 				cout << "1. View Account Balance" << endl;
 				cout << "2. Deposit Money" << endl;
@@ -103,7 +103,7 @@ int main() {
 				cout << "5. Return to Previous Menu" << endl;
 				cout << "Please Enter Your Choice : " << endl;
 				cin >> choice3;
-				cout << "Option " << choice3 << endl;
+				cout << endl << "Option " << choice3 << endl;
 
 				switch (choice3) {
 

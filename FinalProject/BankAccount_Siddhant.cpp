@@ -77,7 +77,7 @@ void BankAccount::depositCashAmount(){
 	ofstream balanceOutputWriteStream;
 	ofstream bankTransationOutputStream;
 
-	cout << "Enter the amount in $ you want to deposit :";
+	cout << endl << "Enter the amount in $ you want to deposit :";
 	cin >> depositAmount;
 	setCashBalance(getCashBalance() + depositAmount);
 	cout << "Congrats! An amount of $" << depositAmount << " is deposited in your account!" << endl;
@@ -113,7 +113,7 @@ void BankAccount::withdrawCashAmount() {
 	ofstream balanceOutputWriteStream;
 	ofstream bankTransationOutputStream;
 
-	cout << "Enter the amount $ to be withdrawn :";
+	cout << endl << "Enter the amount $ to be withdrawn :";
 	cin >> withdrawalAmount;
 
 	setBalance();
