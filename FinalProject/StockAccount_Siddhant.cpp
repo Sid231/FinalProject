@@ -307,8 +307,8 @@ void StockAccount::buyShares() {
 			bankTransationOutputStream << endl << left << setw(30) << "Debited to Stock Account";
 			bankTransationOutputStream << left << setw(1) << "$";
 			bankTransationOutputStream << left << setw(15) << totalAmount;
-			bankTransationOutputStream << left << setw(15) << str;
-			bankTransationOutputStream << left << setw(5) << "$" << getCashBalance();
+			bankTransationOutputStream << left << setw(25) << str;
+			bankTransationOutputStream << left << setw(1) << "$" << getCashBalance();
 			bankTransationOutputStream.close();
 
 			//UPDATE LINKEDLIST
@@ -445,7 +445,7 @@ void StockAccount::sellShares() {
 						bankTransationOutputStream << endl << left << setw(30) << "Debited to Stock Account";
 						bankTransationOutputStream << left << setw(1) << "$";
 						bankTransationOutputStream << left << setw(15) << totalAmount;
-						bankTransationOutputStream << left << setw(15) << str;
+						bankTransationOutputStream << left << setw(25) << str;
 						bankTransationOutputStream << left << setw(1) << "$" << getCashBalance();
 						bankTransationOutputStream.close();
 
