@@ -1,4 +1,0 @@
-IBM	20
-AAPL	3
-MSFT	9
-GOOG	3
