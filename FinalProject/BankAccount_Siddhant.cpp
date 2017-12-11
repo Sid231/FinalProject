@@ -60,6 +60,7 @@ void BankAccount::viewBalance() {
 void BankAccount::depositCashAmount(){
 	
 	ofstream balanceOutputWriteStream;
+	ofstream bankTransationOutputStream;
 
 	cout << "Enter the amount in $ you want to deposit :";
 	cin >> depositAmount;
@@ -73,11 +74,20 @@ void BankAccount::depositCashAmount(){
 	time(&timev);
 	localtime_s(&now, &timev);
 	strftime(timeBuffer, 100, "%d-%m-%Y %I:%M:%S", &now);
-	string str(timeBuffer);
+	string strData(timeBuffer);
 
 	balanceOutputWriteStream.open("cashBalance.txt");
 	balanceOutputWriteStream << getCashBalance();
 	balanceOutputWriteStream.close();
+
+	//WRITE THE TRANSACTION TO BANK_TRANSACTION_HISTORY.TXT FILE
+	bankTransationOutputStream.open("bank_transaction_history.txt", ios::app);
+	bankTransationOutputStream << endl << left << setw(25) << "Deposit";
+	bankTransationOutputStream << left << setw(5) << "$";
+	bankTransationOutputStream << left << setw(15) << depositAmount;
+	bankTransationOutputStream << left << setw(15) << strData;
+	bankTransationOutputStream << left << setw(5) << "$" << getCashBalance();
+	bankTransationOutputStream.close();
 
 }
 
@@ -116,10 +126,10 @@ void BankAccount::withdrawCashAmount() {
 			//WRITE THE TRANSACTION TO BANK_TRANSACTION_HISTORY.TXT FILE
 			bankTransationOutputStream.open("bank_transaction_history.txt", ios::app);
 			bankTransationOutputStream << endl << left << setw(25) << "Withdrawal";
-			bankTransationOutputStream << left << setw(25) << "$";
-			bankTransationOutputStream << left << setw(25) << withdrawalAmount;
-			bankTransationOutputStream << left << setw(25) << strData;
-			bankTransationOutputStream << left << setw(25) << "$" << getCashBalance();
+			bankTransationOutputStream << left << setw(5) << "$";
+			bankTransationOutputStream << left << setw(15) << withdrawalAmount;
+			bankTransationOutputStream << left << setw(15) << strData;
+			bankTransationOutputStream << left << setw(5) << "$" << getCashBalance();
 			bankTransationOutputStream.close();
 
 			return;
