@@ -725,6 +725,7 @@ void StockAccount::setPortfolioValue() {
 	strftime(timeBuffer, 100, "%d-%m-%Y %I:%M:%S", &now);
 	string str(timeBuffer);
 
+	//UPDATE THE CASHBALANCE IF THE PORTFOLIO IS EMPTY
 	if (sizeOfList == 0) {
 		portValue = getCashBalance();
 	}
@@ -734,8 +735,10 @@ void StockAccount::setPortfolioValue() {
 
 }
 
+//GET THE PORTFOLIO VALUE
 void StockAccount::retrievePortfolioValue() {
 	
+	//OPEN THE FILE port_value_data.txt AND GET THE HISTORICAL DATA
 	ifstream savePortfolioInputStream;
 	string portfolioData, tempData;
 	stringstream stream;
@@ -750,6 +753,7 @@ void StockAccount::retrievePortfolioValue() {
 				continue;
 			}
 			else {
+				//APPEND THE TIME WITH DATA
 				timeStamp_array[sizeOfPortValueArray].append(" ");
 				timeStamp_array[sizeOfPortValueArray].append(tempData);
 			}
@@ -760,6 +764,7 @@ void StockAccount::retrievePortfolioValue() {
 	savePortfolioInputStream.close();
 }
 
+//PRINT THE TRANSACTION HISTORY
 void StockAccount::printHistory() {
 	
 	ifstream stockTransactionInputStream;
@@ -785,8 +790,10 @@ void StockAccount::printHistory() {
 	stockTransactionInputStream.close();
 }
 
+//PLOT THE GRAPH IN MATLAB
 void StockAccount::viewGraph() {
 	
+	//POINTER TO THE ENGINE
 	Engine *matlabPlotNode;
 	matlabPlotNode = engOpen(NULL);
 
@@ -794,17 +801,21 @@ void StockAccount::viewGraph() {
 		cout << "Error in matlab plotting" << endl;
 		exit(1);
 	}
-
+	//CREATE MXARRAY AND COPY THE C++ DOUBLE ARRAY OF PORTFOLIO IN IT
 	cout << "Plotting MATLAB graph..." << endl;
 	mxArray *MXA;
 	MXA = mxCreateDoubleMatrix(1, sizeOfPortValueArray, mxREAL);
+	//ALLOCATE MEMORY SPACE
 	memcpy((void *)mxGetPr(MXA), (void*)portValue_array, sizeOfPortValueArray * sizeof(double));
 	engPutVariable(matlabPlotNode, "set", MXA);
+	//PLOT THE DATA
 	engEvalString(matlabPlotNode, "plot(set);");
 	engEvalString(matlabPlotNode, "title('Change in Portfolio Value');");
+	//DEALLOCATE THE MATRIX
 	mxDestroyArray(MXA);
 }
 
+//UPDATE THE SIZE OF THE LINKEDLIST IN THE FILE stock_list_size_data.txt
 void StockAccount::updateSizeOfList(int sizeOfList) {
 	ofstream listSizeOutputStream;
 	listSizeOutputStream.open("stock_list_size_data.txt");
