@@ -686,6 +686,7 @@ void StockAccount::printHistory() {
 			}
 		}
 	}
+	cout << endl;
 	stockTransactionInputStream.close();
 }
 
