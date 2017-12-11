@@ -47,6 +47,7 @@ public:
 	void retrievePortfolioValue();
 	void setPortfolioValue();
 	void printHistory();
+	void updateSizeOfList(int);
 
 };
 

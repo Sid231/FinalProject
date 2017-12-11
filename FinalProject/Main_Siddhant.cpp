@@ -117,6 +117,7 @@ int main() {
 
 		case 3:
 			stockAccount.savePortfolioDataToFile(); 
+			stockAccount.setPortfolioValue();
 			//bankAccount.savePortValue(); 
 			break;
 

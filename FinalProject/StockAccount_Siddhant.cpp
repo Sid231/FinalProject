@@ -299,6 +299,7 @@ void StockAccount::buyShares() {
 		cout << "The ticker symbol of the stock you entered is invalid!" << endl;
 		return;
 	}
+	updateSizeOfList(sizeOfList);
 }
 
 void StockAccount::sellShares() {
@@ -453,7 +454,7 @@ void StockAccount::sellShares() {
 		cout << "The ticker symbol of the stock you entered is invalid!" << endl;
 		return;
 	}
-
+	updateSizeOfList(sizeOfList);
 }
 
 bool StockAccount::sortLinkedListStockData() {
@@ -675,3 +676,11 @@ void StockAccount::printHistory() {
 }
 
 //void StockAccount::plotGraph() {}
+
+void StockAccount::updateSizeOfList(int sizeOfList) {
+	ofstream listSizeOutputStream;
+	listSizeOutputStream.open("stock_list_size_data.txt");
+	listSizeOutputStream << sizeOfList;
+	listSizeOutputStream.close();
+}
+
