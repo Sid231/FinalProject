@@ -128,6 +128,7 @@ void StockAccount::displayCurrentPortfolio() {
 			if (currentNode->company == it->first) {
 				currentNode->amountPerShare = it->second;
 				currentNode->currentPortfolioNodeVal = currentNode->numberOfShares * currentNode->amountPerShare;
+				break;
 			}
 		}
 		currentNode = currentNode->next;
@@ -199,6 +200,7 @@ void StockAccount::buyShares() {
 		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 			if (companySymbol == it->first) {
 				shareValueOfCompany = it->second;
+				break;
 			}
 		}
 
@@ -653,11 +655,11 @@ void StockAccount::printHistory() {
 	ifstream stockTransactionInputStream;
 	string historyData;
 
-	cout << left << setw(10) << "Transaction" << endl;
-	cout << left << setw(10) << "Symbol" << endl;
-	cout << left << setw(10) << "Shares" << endl;
-	cout << left << setw(10) << "Price per Share (in $)" << endl;
-	cout << left << setw(10) << "Value (in $)" << endl;
+	cout << left << setw(10) << "Transaction";
+	cout << left << setw(10) << "Symbol";
+	cout << left << setw(10) << "Shares";
+	cout << left << setw(10) << "Price per Share (in $)";
+	cout << left << setw(10) << "Value (in $)";
 	cout << left << setw(10) << "Timestamp" << endl;
 
 	stockTransactionInputStream.open("stock_transaction_history.txt");
