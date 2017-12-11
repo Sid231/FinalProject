@@ -240,12 +240,12 @@ void StockAccount::buyShares() {
 
 			//WRITE THE TRANSACTION TO STOCK_TRANSACTION_HISTORY.TXT FILE
 			stockTransactionOutputStream.open("stock_transaction_history.txt",ios::app);
-			stockTransactionOutputStream << endl << left << setw(25) << "Buy";
-			stockTransactionOutputStream << left << setw(25) << companySymbol;
-			stockTransactionOutputStream << left << setw(25) << numberOfShares;
-			stockTransactionOutputStream << left << setw(25) << shareValueOfCompany;
-			stockTransactionOutputStream << left << setw(25) << totalAmount;
-			stockTransactionOutputStream << left << setw(25) << str;
+			stockTransactionOutputStream << endl << left << setw(15) << "Buy";
+			stockTransactionOutputStream << left << setw(15) << companySymbol;
+			stockTransactionOutputStream << left << setw(7) << numberOfShares;
+			stockTransactionOutputStream << left << setw(15) << shareValueOfCompany;
+			stockTransactionOutputStream << left << setw(10) << totalAmount;
+			stockTransactionOutputStream << left << setw(15) << str;
 			stockTransactionOutputStream.close();
 
 			if (sizeOfList > 0) {
@@ -254,11 +254,11 @@ void StockAccount::buyShares() {
 
 			//WRITE THE TRANSACTION TO BANK_TRANSACTION_HISTORY.TXT FILE
 			bankTransationOutputStream.open("bank_transaction_history.txt", ios::app);
-			bankTransationOutputStream << endl << left << setw(25) << "Debited to Stock Account";
-			bankTransationOutputStream << left << setw(25) << "$";
-			bankTransationOutputStream << left << setw(25) << totalAmount;
-			bankTransationOutputStream << left << setw(25) << str;
-			bankTransationOutputStream << left << setw(25) << "$" << getCashBalance();
+			bankTransationOutputStream << endl << left << setw(30) << "Debited to Stock Account";
+			bankTransationOutputStream << left << setw(1) << "$";
+			bankTransationOutputStream << left << setw(15) << totalAmount;
+			bankTransationOutputStream << left << setw(15) << str;
+			bankTransationOutputStream << left << setw(5) << "$" << getCashBalance();
 			bankTransationOutputStream.close();
 
 			//UPDATE LINKEDLIST
@@ -378,21 +378,21 @@ void StockAccount::sellShares() {
 
 						//WRITE THE TRANSACTION TO STOCK_TRANSACTION_HISTORY.TXT FILE
 						stockTransactionOutputStream.open("stock_transaction_history.txt", ios::app);
-						stockTransactionOutputStream << endl << left << setw(25) << "Sell";
-						stockTransactionOutputStream << left << setw(25) << companySymbol;
-						stockTransactionOutputStream << left << setw(25) << numberOfShares;
-						stockTransactionOutputStream << left << setw(25) << shareValueOfCompany;
-						stockTransactionOutputStream << left << setw(25) << totalAmount;
-						stockTransactionOutputStream << left << setw(25) << str;
+						stockTransactionOutputStream << endl << left << setw(15) << "Sell";
+						stockTransactionOutputStream << left << setw(15) << companySymbol;
+						stockTransactionOutputStream << left << setw(7) << numberOfShares;
+						stockTransactionOutputStream << left << setw(15) << shareValueOfCompany;
+						stockTransactionOutputStream << left << setw(10) << totalAmount;
+						stockTransactionOutputStream << left << setw(15) << str;
 						stockTransactionOutputStream.close();
 
 						//WRITE THE TRANSACTION TO BANK_TRANSACTION_HISTORY.TXT FILE
 						bankTransationOutputStream.open("bank_transaction_history.txt", ios::app);
-						bankTransationOutputStream << endl << left << setw(25) << "Debited to Stock Account";
-						bankTransationOutputStream << left << setw(25) << "$";
-						bankTransationOutputStream << left << setw(25) << totalAmount;
-						bankTransationOutputStream << left << setw(25) << str;
-						bankTransationOutputStream << left << setw(25) << "$" << getCashBalance();
+						bankTransationOutputStream << endl << left << setw(30) << "Debited to Stock Account";
+						bankTransationOutputStream << left << setw(1) << "$";
+						bankTransationOutputStream << left << setw(15) << totalAmount;
+						bankTransationOutputStream << left << setw(15) << str;
+						bankTransationOutputStream << left << setw(1) << "$" << getCashBalance();
 						bankTransationOutputStream.close();
 
 						//UPDATE LINKED LIST
@@ -670,8 +670,8 @@ void StockAccount::printHistory() {
 	ifstream stockTransactionInputStream;
 	string historyData;
 
-	cout << left << setw(10) << "Transaction";
-	cout << left << setw(15) << "Symbol";
+	cout << left << setw(15) << "Transaction";
+	cout << left << setw(12) << "Symbol";
 	cout << left << setw(7) << "Shares";
 	cout << left << setw(15) << "Price per Share($)";
 	cout << left << setw(10) << "Value($)";

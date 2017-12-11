@@ -82,11 +82,11 @@ void BankAccount::depositCashAmount(){
 
 	//WRITE THE TRANSACTION TO BANK_TRANSACTION_HISTORY.TXT FILE
 	bankTransationOutputStream.open("bank_transaction_history.txt", ios::app);
-	bankTransationOutputStream << endl << left << setw(25) << "Deposit";
-	bankTransationOutputStream << left << setw(5) << "$";
+	bankTransationOutputStream << endl << left << setw(30) << "Deposit";
+	bankTransationOutputStream << left << setw(1) << "$";
 	bankTransationOutputStream << left << setw(15) << depositAmount;
-	bankTransationOutputStream << left << setw(15) << strData;
-	bankTransationOutputStream << left << setw(5) << "$" << getCashBalance();
+	bankTransationOutputStream << left << setw(25) << strData;
+	bankTransationOutputStream << left << setw(1) << "$" << getCashBalance();
 	bankTransationOutputStream.close();
 
 }
@@ -125,11 +125,11 @@ void BankAccount::withdrawCashAmount() {
 
 			//WRITE THE TRANSACTION TO BANK_TRANSACTION_HISTORY.TXT FILE
 			bankTransationOutputStream.open("bank_transaction_history.txt", ios::app);
-			bankTransationOutputStream << endl << left << setw(25) << "Withdrawal";
-			bankTransationOutputStream << left << setw(5) << "$";
+			bankTransationOutputStream << endl << left << setw(30) << "Withdrawal";
+			bankTransationOutputStream << left << setw(1) << "$";
 			bankTransationOutputStream << left << setw(15) << withdrawalAmount;
-			bankTransationOutputStream << left << setw(15) << strData;
-			bankTransationOutputStream << left << setw(5) << "$" << getCashBalance();
+			bankTransationOutputStream << left << setw(25) << strData;
+			bankTransationOutputStream << left << setw(1) << "$" << getCashBalance();
 			bankTransationOutputStream.close();
 
 			return;
@@ -146,11 +146,10 @@ void BankAccount::printHistory() {
 	ifstream bankTransationInputStream;
 	string historyData;
 
-	cout << endl << left << setw(10) << "Transaction";
-	cout << left << setw(10) << "Amount";
-	cout << left << setw(10) << "Price per Share (in $)";
-	cout << left << setw(10) << "Value (in $)";
-	cout << left << setw(10) << "Timestamp" << endl;
+	cout << endl << left << setw(30) << "Transaction";
+	cout << left << setw(18) << "Amount($)";
+	cout << left << setw(22) << "Timestamp";
+	cout << left << setw(10) << "Balance($)" << endl;
 
 	bankTransationInputStream.open("bank_transaction_history.txt");
 
@@ -161,5 +160,6 @@ void BankAccount::printHistory() {
 			}
 		}
 	}
+	cout << endl;
 	bankTransationInputStream.close();
 }
