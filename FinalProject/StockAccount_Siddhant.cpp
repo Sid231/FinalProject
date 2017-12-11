@@ -702,11 +702,24 @@ void StockAccount::printHistory() {
 	stockTransactionInputStream.close();
 }
 
-void StockAccount::plotGraph() {
+void StockAccount::viewGraph() {
 	
-	Engine *plotNode;
-	plotNode = engOpen(NULL);
+	Engine *matlabPlotNode;
+	matlabPlotNode = engOpen(NULL);
 
+	if (matlabPlotNode == NULL) {
+		cout << "Error in matlab plotting" << endl;
+		exit(1);
+	}
+
+	cout << "Plotting MATLAB graph..." << endl;
+	mxArray *MXA;
+	MXA = mxCreateDoubleMatrix(1, sizeOfPortValueArray, mxREAL);
+	memcpy((void *)mxGetPr(MXA), (void*)portValue_array, sizeOfPortValueArray * sizeof(double));
+	engPutVariable(matlabPlotNode, "set", MXA);
+	engEvalString(matlabPlotNode, "plot(set);");
+	engEvalString(matlabPlotNode, "title('Change in Portfolio Value');");
+	mxDestroyArray(MXA);
 }
 
 void StockAccount::updateSizeOfList(int sizeOfList) {
