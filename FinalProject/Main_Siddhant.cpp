@@ -92,14 +92,14 @@ int main() {
 				switch (choice3) {
 
 				case 1:
-					//bankAccount.viewBalance();
+					bankAccount.viewBalance();
 					break;
 				case 2:
-					//bankAccount.depositAmount();
+					bankAccount.depositCashAmount();
 					//bankAccount.savePortValue();
 					break;
 				case 3:
-					//bankAccount.withdrawAmount();
+					bankAccount.withdrawCashAmount();
 					//bankAccount.savePortValue();
 					break;
 				case 4:

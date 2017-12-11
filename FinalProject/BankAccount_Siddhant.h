@@ -9,10 +9,19 @@ using namespace std;
 
 class BankAccount : public Account
 {
+
+private:
+	double depositAmount = 0.0;
+	double withdrawalAmount = 0.0;
+
 public:
 	BankAccount();
 	~BankAccount();
-
+	void setBalance();
+	double getBalance();
+	void viewBalance();
+	void depositCashAmount();
+	void withdrawCashAmount();
 };
 
 #endif
