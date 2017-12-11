@@ -1,3 +1,9 @@
+/*
+NAME: KUMAR SIDDHANT
+DATE: 12/11/2017
+PROJECT: ACCOUNT MANAGEMENT SYSTEM
+FILE: BANKACCOUNT_SIDDHANT.CPP
+*/
 #include "BankAccount_Siddhant.h"
 #include <iostream>
 #include <stdlib.h>
@@ -8,6 +14,7 @@
 #include <fstream>
 using namespace std;
 
+//IMPLEMENTATION OF THE CONSTRUCTOR
 BankAccount::BankAccount()
 {
 	setBalance();
@@ -15,28 +22,32 @@ BankAccount::BankAccount()
 	withdrawalAmount = 0.0;
 }
 
-
+//IMPLEMENTATION OF THE DESTRUCTOR
 BankAccount::~BankAccount()
 {
 }
 
+//SET CASH BALANCE
 void BankAccount::setBalance() {
 	ifstream cashFileStream;
 	string content = "";
 	double amount = 0.0;
 	int i = 0;
 
+	//OPEN THE CASHBALANCE.TXT FILE
 	cashFileStream.open("cashBalance.txt");
 	if (!cashFileStream) {
 		cerr << "Unable to open the file!!" << endl;
 	}
 
+	//CASHBALANCE.TXT FILE STREAM ITERATION LETTER BY LETTER
 	for (i = 0; cashFileStream.eof() != true; i++) {
 		content += cashFileStream.get();
 	}
 	i--;
 	content.erase(content.end() - 1);
 
+	//SET THE CASH AMOUNT
 	if ((content != "") || (content != " ")) {
 		amount = ::atof(content.c_str());
 		setCashBalance(amount);
@@ -44,19 +55,23 @@ void BankAccount::setBalance() {
 	else {
 		setCashBalance(10000.0);
 	}
+	//CLOSE THE FILE
 	cashFileStream.close();
 }
 
+//RETRIEVE CASH BALANCE
 double BankAccount::getBalance() {
 	return getCashBalance();
 }
 
+//DISPLAY THE CURRENT CASH AMOUNT BALANCE AVAILABLE IN THE ACCOUNT
 void BankAccount::viewBalance() {
 
 	setBalance();
 	cout << "The present cash balance in your account is : $" << getBalance() << endl;
 }
 
+//METHOD TO DEPOSIT CASH
 void BankAccount::depositCashAmount(){
 	
 	ofstream balanceOutputWriteStream;
@@ -76,6 +91,7 @@ void BankAccount::depositCashAmount(){
 	strftime(timeBuffer, 100, "%d-%m-%Y %I:%M:%S", &now);
 	string strData(timeBuffer);
 
+	//UPDATE THE CASHBALANCE.TXT FILE WITH THE CURRENT CASH AMOUNT
 	balanceOutputWriteStream.open("cashBalance.txt");
 	balanceOutputWriteStream << getCashBalance();
 	balanceOutputWriteStream.close();
@@ -91,6 +107,7 @@ void BankAccount::depositCashAmount(){
 
 }
 
+//METHOD TO WITHDRAW CASH
 void BankAccount::withdrawCashAmount() {
 
 	ofstream balanceOutputWriteStream;
@@ -101,6 +118,7 @@ void BankAccount::withdrawCashAmount() {
 
 	setBalance();
 
+	//RUN ALGORITHMS IF THERE IS SOME CASH IN THE ACCOUNT
 	if (getCashBalance() > 0) {
 		if (withdrawalAmount > getCashBalance()) {
 			cout << "Sorry you dont have this much amount in your account!" << endl;
@@ -119,6 +137,7 @@ void BankAccount::withdrawCashAmount() {
 			strftime(timeBuffer, 100, "%d-%m-%Y %I:%M:%S", &now);
 			string strData(timeBuffer);
 
+			//UPDATE THE CASHBALANCE.TXT FILE WITH THE CURRENT CASH AMOUNT
 			balanceOutputWriteStream.open("cashBalance.txt");
 			balanceOutputWriteStream << getCashBalance();
 			balanceOutputWriteStream.close();
@@ -141,6 +160,7 @@ void BankAccount::withdrawCashAmount() {
 	}
 }
 
+//PRINT THE TRANSACTION HISTORY
 void BankAccount::printHistory() {
 	
 	ifstream bankTransationInputStream;

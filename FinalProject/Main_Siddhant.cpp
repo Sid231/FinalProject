@@ -1,3 +1,9 @@
+/*
+NAME: KUMAR SIDDHANT
+DATE: 12/11/2017
+PROJECT: ACCOUNT MANAGEMENT SYSTEM
+FILE: MAIN_SIDDHANT.CPP
+*/
 #include <iostream>
 #include "Account_Siddhant.h"
 #include "BankAccount_Siddhant.h"
@@ -6,15 +12,17 @@
 using namespace std;
 
 int main() {
+	//USER CHOICE VARIABLES IN THE MENU
 	int choice1 = 0;
 	int choice2 = 0;
 	int choice3 = 0;
 
+	//INIT HEAD POINTER AND THE BANK AND STOCK ACCOUNT OBJECTS
 	accountNode *head = NULL;
 	BankAccount bankAccount;
 	StockAccount stockAccount;
 
-
+	//MAIN MENU
 	cout << "Welcome to the Account Management System!!" << endl;
 
 	while (choice1 != 3) {
@@ -32,6 +40,7 @@ int main() {
 		switch (choice1) {
 
 		case 1:
+			//STOCK ACCOUNT MENU
 			cout << "Stock Portfolio Account" << endl;
 			while (choice2 != 7) {
 				cout << "1. Display the price for a Stock Symbol" << endl;
@@ -48,24 +57,31 @@ int main() {
 				switch (choice2)
 				{
 				case 1:
+					//DISPLAY STOCK PRICE
 					stockAccount.displayStockPrice(); 
 					break;
 				case 2:
+					//DISPLAY THE CURRENT PORTFOLIO INFO
 					stockAccount.displayCurrentPortfolio();
 					break;
 				case 3:
+					//BUY SHARES
 					stockAccount.buyShares();
 					break;
 				case 4:
+					//SELL SHARES
 					stockAccount.sellShares();
 					break;
 				case 5:
+					//VIEW GRAPH
 					stockAccount.viewGraph();
 					break;
 				case 6:
+					//PRINT TRANSACTION HISTORY
 					stockAccount.printHistory();
 					break;
 				case 7:
+					//SORT LINKEDLIST AND GO BAK TO MAIN MENU
 					stockAccount.sortLinkedListStockData();
 					break;
 				default:
@@ -77,7 +93,7 @@ int main() {
 
 		case 2:
 			while (choice3 != 5) {
-
+				//BANK ACCOUNT MENU
 				cout << "Bank Account" << endl << endl;
 				cout << "Please select an option:" << endl;
 				cout << "1. View Account Balance" << endl;
@@ -92,18 +108,23 @@ int main() {
 				switch (choice3) {
 
 				case 1:
+					//VIEW BALANCE
 					bankAccount.viewBalance();
 					break;
 				case 2:
+					//DEPOSIT CASH
 					bankAccount.depositCashAmount();
 					break;
 				case 3:
+					//WITHDRAW CASH
 					bankAccount.withdrawCashAmount();
 					break;
 				case 4:
+					//PRINT TRANSACTION HISTORY
 					bankAccount.printHistory();
 					break;
 				case 5:
+					//RETURN TO PREVIOUS MENU
 					break;
 				default:
 					cout << "Please Enter Valid Option!" << endl;
@@ -113,7 +134,10 @@ int main() {
 			break;
 
 		case 3:
+			//SAVE PORTFOLIO DATA TO THE FILE BEFORE EXITING
 			stockAccount.savePortfolioDataToFile(); 
+
+			//SET THE PORTFOLIO VALUE AMOUNT BEFORE EXITING
 			stockAccount.setPortfolioValue();
 			break;
 
