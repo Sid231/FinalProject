@@ -2,7 +2,7 @@
 NAME: KUMAR SIDDHANT
 DATE: 12/11/2017
 PROJECT: ACCOUNT MANAGEMENT SYSTEM
-FILE: BANKACCOUNT_SIDDHANT.CPP
+FILE: STOCKACCOUNT_SIDDHANT.CPP
 */
 
 
@@ -165,6 +165,7 @@ void StockAccount::displayCurrentPortfolio() {
 	setBalance();
 	double stockValue = 0.0;
 	
+	//LOOP THROUGH THE LINKED LIST AND GE THE DATA BY LOOPING THROUGH THE STOCK DATA MAP
 	while (currentNode != NULL) {
 		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 			if (currentNode->company == it->first) {
@@ -177,6 +178,7 @@ void StockAccount::displayCurrentPortfolio() {
 	}
 	this->sortLinkedListStockData();
 
+	//IF THE LINKEDLIST IS NOT EMPTY
 	if (sizeOfList > 0) {
 		cout << left << setw(20) << "Company-Symbol";
 		cout << left << setw(20) << "Shares";
@@ -194,21 +196,25 @@ void StockAccount::displayCurrentPortfolio() {
 			currentNode = currentNode->next;
 		}
 
+		//UPDATE THE TOTAL PORTFOLIO VALUE
 		portValue = getCashBalance() + stockValue;
 		cout << "Cash Balance is : $" << getCashBalance() << endl;
 		cout << "Stock Balance is : $" << stockValue << endl;
 		cout << "Total Portfolio value is : $" << portValue << endl;
 	
+		//UPDATE THE PORTFOLIO VALUES IN AN ARRAY AND INCREASE THE SIZE OF ARRAY BY 1
 		portValue_array[sizeOfPortValueArray] = portValue;
 		sizeOfPortValueArray++;
 	}
 
+	//NO DATA IN THE LINKEDLIST SO NOTHING TO SHOW
 	if (sizeOfList == 0) {
 		portValue = getCashBalance();
 		cout << "Shares are not available!!" << endl;
 	}
 }
 
+//BUY SHARES
 void StockAccount::buyShares() {
 
 	string companySymbol;
@@ -224,6 +230,7 @@ void StockAccount::buyShares() {
 	cout << "Enter the ticker symbol of the stock you want to buy" << endl;
 	cin >> companySymbol;
 
+	//CHECK IF THE STOCK TO BE PURCHASED EXISTS IN THE ACCOUNT SYSTEM
 	for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 		if (companySymbol == it->first) {
 			validCompanySymbolData = true;
@@ -231,14 +238,17 @@ void StockAccount::buyShares() {
 		}
 	}
 
+	//STOCK EXISTS IN THE SYSTEM
 	if (validCompanySymbolData == true) {
 		cout << "Enter the number of shares you want to buy" << endl;
 		cin >> numberOfShares;
 		cout << "Enter the maximum limit you are willing to pay per share" << endl;
 		cin >> maxAmtPay;
 
+		//UPDATE THE CASH BALANCE AMOUNT
 		setBalance();
 
+		//GET HTE STOCK DATA INFO
 		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 			if (companySymbol == it->first) {
 				shareValueOfCompany = it->second;
@@ -246,6 +256,7 @@ void StockAccount::buyShares() {
 			}
 		}
 
+		//MAX PAY SHOULD BE GREATER THAN THE STOCK VALUE. IF NOT THEN THE USER CANT BUY THE STOCK
 		if (maxAmtPay >= shareValueOfCompany) {
 			totalAmount = numberOfShares * shareValueOfCompany;
 		}
@@ -254,6 +265,7 @@ void StockAccount::buyShares() {
 			return;
 		}
 
+		//CONDITION TO CHECK IF THERE IS ENOUGH MONEY IN THE ACCOUNT TO BUY THE STOCKS
 		if (totalAmount > getCashBalance()) {
 			cout << "Insufficient balance in your account! Please check again later!" << endl;
 			return;
@@ -289,10 +301,6 @@ void StockAccount::buyShares() {
 			stockTransactionOutputStream << left << setw(10) << totalAmount;
 			stockTransactionOutputStream << left << setw(15) << str;
 			stockTransactionOutputStream.close();
-
-			if (sizeOfList > 0) {
-
-			}
 
 			//WRITE THE TRANSACTION TO BANK_TRANSACTION_HISTORY.TXT FILE
 			bankTransationOutputStream.open("bank_transaction_history.txt", ios::app);
@@ -346,6 +354,7 @@ void StockAccount::buyShares() {
 		cout << "The ticker symbol of the stock you entered is invalid!" << endl;
 		return;
 	}
+	//UPDATE THE SIZE OF THE LINKEDLIST IN port_value_data.txt FILE
 	updateSizeOfList(sizeOfList);
 }
 
@@ -365,6 +374,7 @@ void StockAccount::sellShares() {
 	cout << "Enter the ticker symbol of the stock you want to sell" << endl;
 	cin >> companySymbol;
 
+	//CHECK IF HEADPOINTER IS NOT NULL AND THE STOCK TO BE SOLD HAS BEEN PURCHASED BEFORE
  	while (tempNode != NULL) {
 		if (tempNode->company == companySymbol) {
 			validCompanySymbolData = true;
@@ -373,6 +383,7 @@ void StockAccount::sellShares() {
 		tempNode = tempNode->next;
 	}
 
+	//STOCK HAS BEEN PURCHASED BEFORE AND CAN BE SOLD
 	if (validCompanySymbolData == true) {
 		
 		cout << "Enter the number of shares you want to sell" << endl;
@@ -380,6 +391,7 @@ void StockAccount::sellShares() {
 		cout << "Enter the minimum limit you are willing to pay per share" << endl;
 		cin >> minAmtPay;
 
+		//THE LINKEDLIST IS NOT EMPTY
 		if (sizeOfList > 0) {
 			accountNode *traversalNode = headPointer;
 			while (traversalNode != NULL) {
@@ -449,14 +461,16 @@ void StockAccount::sellShares() {
 									tailPointer = NULL;
 									delete traversalNode;
 									sizeOfList--;
+									//UPDATE THE SIZE OF THE LINKEDLIST IN port_value_data.txt FILE
 									updateSizeOfList(sizeOfList);
 									return;
 								}
 								accountNode *temporaryPointer1 = traversalNode->next;
 								headPointer = traversalNode->next;
-								temporaryPointer1->prev = NULL;//temporaryPointer->prev = NULL;?? TODO
+								temporaryPointer1->prev = NULL;
 								delete traversalNode;
 								sizeOfList--;
+								//UPDATE THE SIZE OF THE LINKEDLIST IN port_value_data.txt FILE
 								updateSizeOfList(sizeOfList);
 								return;
 							}
@@ -468,14 +482,16 @@ void StockAccount::sellShares() {
 									tailPointer = NULL;
 									delete traversalNode;
 									sizeOfList--;
+									//UPDATE THE SIZE OF THE LINKEDLIST IN port_value_data.txt FILE
 									updateSizeOfList(sizeOfList);
 									return;
 								}
 								accountNode *temporaryPointer2 = traversalNode->prev;
 								tailPointer = traversalNode->prev;
-								temporaryPointer2->next = NULL;//temporaryPointer->next = NULL;?? TODO
+								temporaryPointer2->next = NULL;
 								delete traversalNode;
 								sizeOfList--;
+								//UPDATE THE SIZE OF THE LINKEDLIST IN port_value_data.txt FILE
 								updateSizeOfList(sizeOfList);
 								return;
 							}
@@ -486,6 +502,7 @@ void StockAccount::sellShares() {
 								temporaryPointer3->next = traversalNode->next;
 								temporaryPointer4->prev = traversalNode->prev;
 								delete traversalNode;
+								//UPDATE THE SIZE OF THE LINKEDLIST IN port_value_data.txt FILE
 								sizeOfList--;
 								updateSizeOfList(sizeOfList);
 								return;
@@ -504,19 +521,24 @@ void StockAccount::sellShares() {
 
 
 	}
+	//THE STOCK HAS NOT BEEN PURCHASED BEFORE OR DOESNT EXIST AT ALL!
 	else {
 		cout << "The ticker symbol of the stock you entered is invalid!" << endl;
 		return;
 	}
+	//UPDATE THE SIZE OF THE LINKEDLIST IN port_value_data.txt FILE
 	updateSizeOfList(sizeOfList);
 }
 
+//SORT THE LINKED LIST
 bool StockAccount::sortLinkedListStockData() {
 
 	accountNode *traversalNode1 = headPointer;
 
+	//CHECK IF HEAD POINTER IS NOT NULL
 	while (traversalNode1 != NULL) {
 
+		//SET THE NODE DATA REQUIRED FOR SORTING
 		for (std::map<string, double>::iterator it = stockDataMap.begin(); it != stockDataMap.end(); it++) {
 			if(traversalNode1 != NULL) {
 				if (traversalNode1->company == it->first) {
@@ -527,19 +549,29 @@ bool StockAccount::sortLinkedListStockData() {
 			}
 		}
 
+		//THE NODE(traversalNode2) WILL TRAVERSE THROUGH THE LIST 
+		//AND SORT THE LINKED LIST USING BUBBLE SORTING
 		accountNode  *traversalNode2 = headPointer;
 
 		if (traversalNode2 != NULL) {
 			
+			//ASSIGN PREVIOUS POINTER AS 0
 			accountNode *prevTempPointer = 0;
+			//TEMPORARY POINTER
 			accountNode *nextTempPointer = NULL;
+			//VALUE TO CHECK IF SWAPPING IS REQUIRED
 			bool isSwapNeeded = false;
 
+			//INITIATION OF BUBBLE SORT
 			for (int i = 0; i < sizeOfList; i++) {
 
+				//STOP IF THE TRAVELLING NODE REACHES THE TAIL POINTER
 				while (traversalNode2->next != 0) {
 					
+					//ASSIGN THE NEXT POINTER TO A TEMPORARY POINTER
 					nextTempPointer = traversalNode2->next;
+
+					//SWAP IS DONE OF THE PORTFOLIO VALUE ON THE LEFT IS SMALLER THAN THE ONE ON RIGHT
 					if (traversalNode2->currentPortfolioNodeVal < nextTempPointer->currentPortfolioNodeVal) {
 						
 						nextTempPointer->prev = traversalNode2->prev;
@@ -547,29 +579,46 @@ bool StockAccount::sortLinkedListStockData() {
 						isSwapNeeded = true;
 						traversalNode2->next = nextTempPointer->next;
 
+						//CHECK IF TAIL POINTER IS NOT NULL
 						if (traversalNode2->next != NULL) {
 							traversalNode2->next->prev = traversalNode2;
 						}
+						//AFTER SWAPPING THE TEMPORARY POINTER SHOULD BECOME THE CURRENT POINTER
 						nextTempPointer->next = traversalNode2;
+
+						//CHECK IF THE POINTER BEFORE THE CURRENT ONE IS NOT NULL
 						if (prevTempPointer != 0) {
 							prevTempPointer->next = nextTempPointer;
 						}
+
+						//FOR NEXT ITERATION THE PREVIOUS POINTER TO CURRENT SHOULD BE THE TEMPORARY POINTER
 						prevTempPointer = nextTempPointer;
+
+						//IF HEADPOINTER IS CURRENT THEN AFTER SWAPPING THE HEADPOINTER SHOULD BE THE CURRENT POINTER
 						if (headPointer == traversalNode2) {
 							headPointer = nextTempPointer;
 						}
+
+						//CHECK IF THE NEXT POINTER TO XURRENT IS TAIL.
+						//IF YES, THEN TAILPOINTER SHOULD BE CURRENT POINTER
 						if (traversalNode2->next == 0) {
 							tailPointer = traversalNode2;
 						}
 					}
+
+					//CONDITION IF THERE IS NO SWAPPING
+					//PREVIOUS POINTER SHOULD BE THE NODE WHICH THE TRAVERSAL NODE IS POINTING TO CURRENTLY
 					else {
 						prevTempPointer = traversalNode2;
 						traversalNode2 = traversalNode2->next;
 					}
 				}
+				//LIST SORTED
 				if (isSwapNeeded = false) {
 					break;
 				}
+
+				//BEGIN AGAIN FROM THE HEAD POINTER
 				else {
 					prevTempPointer = 0;
 					traversalNode2 = headPointer;
@@ -577,6 +626,7 @@ bool StockAccount::sortLinkedListStockData() {
 				}
 			}
 		}
+		//EMPTY LIST... NOTHING CAN BE DONE
 		else {
 			cout << "Empty list!! Sorry cannot sort at this moment!" << endl;
 			return false;
@@ -585,6 +635,7 @@ bool StockAccount::sortLinkedListStockData() {
 	return true;
 }
 
+//SAVE THE PORTFOLIO VALUE TO A FILE
 void StockAccount::savePortfolioDataToFile() {
 	
 	accountNode *traversalNode = headPointer;
@@ -599,6 +650,7 @@ void StockAccount::savePortfolioDataToFile() {
 	savePortfolioOutputStream.close();
 }
 
+//GET VALUE FROM THE PORTFOLIO TXT FILE TO THE LINKEDLIST
 void StockAccount::retrieveDataToLinkedList(){
 	
 	ifstream savePortfolioInputStream;
@@ -659,6 +711,7 @@ void StockAccount::retrieveDataToLinkedList(){
 	portValue += getCashBalance();
 }
 
+//SAVE THE PORTFOLIO VALUE
 void StockAccount::setPortfolioValue() {
 
 	ofstream savePortfolioOutputStream;
