@@ -48,7 +48,7 @@ public:
 	void setPortfolioValue();
 	void printHistory();
 	void updateSizeOfList(int);
-
+	void plotGraph();
 };
 
 #endif

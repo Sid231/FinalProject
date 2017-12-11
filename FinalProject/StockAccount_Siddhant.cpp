@@ -1,3 +1,14 @@
+//MATLAB LIBS
+#pragma comment(lib,"libmx.lib")
+#pragma comment(lib,"libmex.lib")
+#pragma comment(lib,"libeng.lib")
+#include<yvals.h>
+#if (_MSC_VER >= 1600)
+#define __STDC_UTF_16__
+#endif
+#include "mex.h"
+#include<engine.h>
+
 #include "StockAccount_Siddhant.h"
 #include "accountNode_Siddhant.h"
 #include <stdlib.h>
@@ -8,6 +19,7 @@
 #include <string>
 #include <sstream>
 #include<map>
+
 using namespace std;
 
 StockAccount::StockAccount(){
@@ -690,7 +702,12 @@ void StockAccount::printHistory() {
 	stockTransactionInputStream.close();
 }
 
-//void StockAccount::plotGraph() {}
+void StockAccount::plotGraph() {
+	
+	Engine *plotNode;
+	plotNode = engOpen(NULL);
+
+}
 
 void StockAccount::updateSizeOfList(int sizeOfList) {
 	ofstream listSizeOutputStream;

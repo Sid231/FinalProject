@@ -60,7 +60,7 @@ int main() {
 					stockAccount.sellShares();
 					break;
 				case 5:
-					//stockAccount.viewGraph();
+					stockAccount.viewGraph();
 					break;
 				case 6:
 					stockAccount.printHistory();
