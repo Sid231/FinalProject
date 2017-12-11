@@ -22,6 +22,7 @@ public:
 	void viewBalance();
 	void depositCashAmount();
 	void withdrawCashAmount();
+	void printHistory();
 };
 
 #endif

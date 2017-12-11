@@ -65,8 +65,8 @@ int main() {
 				case 6:
 					stockAccount.printHistory();
 					break;
-
 				case 7:
+					stockAccount.sortLinkedListStockData();
 					break;
 				default:
 					cout << "Please Enter a Valid Option!" << endl;
@@ -96,14 +96,12 @@ int main() {
 					break;
 				case 2:
 					bankAccount.depositCashAmount();
-					//bankAccount.savePortValue();
 					break;
 				case 3:
 					bankAccount.withdrawCashAmount();
-					//bankAccount.savePortValue();
 					break;
 				case 4:
-					//bankAccount.printHistory();
+					bankAccount.printHistory();
 					break;
 				case 5:
 					break;
@@ -111,14 +109,12 @@ int main() {
 					cout << "Please Enter Valid Option!" << endl;
 				}
 			}
-
 			choice3 = 0;
 			break;
 
 		case 3:
 			stockAccount.savePortfolioDataToFile(); 
 			stockAccount.setPortfolioValue();
-			//bankAccount.savePortValue(); 
 			break;
 
 		default:
